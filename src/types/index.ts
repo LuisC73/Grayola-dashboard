@@ -10,7 +10,7 @@ interface ImageProps {
 // Components
 export interface ButtonProps {
   label: string;
-  icon?: string;
+  icon?: IconProps;
   ariaLabel?: string;
   style: 'Primary' | 'Secondary';
   parentMethod?: () => void;
@@ -43,6 +43,12 @@ export interface InputProps {
 
 export interface SelectProps extends Omit<InputProps, 'type'> {
   options: string[];
+}
+
+export interface SideBarsProps {
+  logo: ImageProps;
+  items: { icon: IconProps; label: string; title: string; href: string }[];
+  button: ButtonProps;
 }
 
 // Content

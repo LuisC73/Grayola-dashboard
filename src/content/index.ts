@@ -1,4 +1,4 @@
-import { AuthProps, HeaderProps, HomeProps } from '@types';
+import { AuthProps, HeaderProps, HomeProps, SideBarsProps } from '@types';
 
 export const CONFIG = {
   'openGraph': {},
@@ -75,3 +75,39 @@ export const REGISTER_CONTENT: AuthProps = {
   }
 };
 
+export const DASHBOARD_MENU: SideBarsProps = {
+  'logo': {
+    'src': '/images/logo.svg',
+    'alt': 'Logo de Grayola',
+    'width': 141,
+    'height': 31,
+  },
+  'items': [
+    {
+      'icon': {
+        'name': 'grid',
+        'size': 18,
+      },
+      'label': 'Dashboard',
+      'title': 'Ingresar al dashboard',
+      'href': '/dashboard'
+    },
+    {
+      'icon': {
+        'name': 'folder',
+        'size': 18,
+      },
+      'label': 'Proyectos',
+      'title': 'Ingresar al dashboard',
+      'href': '/dashboard/projects'
+    }
+  ],
+  'button': {
+    'label': 'Cerrar sesión',
+    'style': 'Primary',
+    'icon': {
+      'name': 'logOut',
+      'size': 16
+    }
+  }
+}
