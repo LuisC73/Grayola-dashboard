@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 // General
 interface ImageProps {
   src: string;
@@ -48,6 +50,11 @@ export interface InputProps {
   parentMethod?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+export interface ModalProps {
+  onClose: () => void;
+  children: ReactNode;
+}
+
 export interface SelectProps extends Omit<InputProps, 'type' | 'parentMethod'> {
   options: RolesOptions[];
   parentMethod?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -83,7 +90,7 @@ export type roleType = 'customer' | 'project_manager' | 'designer';
 export interface RolesOptions {
   id: roleType;
   label: string;
-} 
+}
 
 export interface User {
   id: string;
