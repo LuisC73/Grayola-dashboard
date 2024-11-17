@@ -12,6 +12,7 @@ export interface ButtonProps {
   icon?: IconProps;
   ariaLabel?: string;
   style: 'Primary' | 'Secondary';
+  isSubmit?: boolean;
   parentMethod?: () => void;
 }
 

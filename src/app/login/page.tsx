@@ -1,9 +1,51 @@
+'use client';
+
 import { LOGIN_CONTENT } from "@/content";
 import { Button, Input } from "@components";
 import Image from "next/image";
 import Link from "next/link";
+import { FormEvent, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { supabase } from "@/lib/supabase";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
+
+  const handleLogin = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    try {
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError) throw new Error(signInError.message);
+
+      if(signInData.user) {
+        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+
+        if (sessionError) throw new Error(sessionError.message);
+
+        if (sessionData?.session) {
+          document.cookie = `supabase-auth-token=${sessionData.session.access_token}; path=/; max-age=${60 * 60 * 24 * 7}; secure; SameSite=Strict`;
+        }
+
+        router.push('/dashboard');
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred');
+      }
+    }
+  }
+
   return (
     <div className="grid grid-cols-1 grid-rows-1 min-h-screen justify-items-center">
       <main className="px-10 py-5 grid grid-cols-1 lg:grid-cols-2 items-center lg:justify-items-center gap-10 max-w-[1400px]">
@@ -13,13 +55,14 @@ export default function LoginPage() {
             <h1 className="font-[family-name:var(--font-title)] text-xl md:text-2xl lg:text-3xl">{LOGIN_CONTENT.title}</h1>
             <p className="font-[family-name:var(--font-body)] text-base text-gray-900">{LOGIN_CONTENT.description}</p>
           </div>
-          <form className="flex flex-col gap-5">
-            <Input id="emailLogin" type="email" label="Email" />
-            <Input id="passwordLogin" type="password" label="Contraseña" />
-            <Button label="Ingresar" style="Primary" />
+          <form className="flex flex-col gap-5" onSubmit={handleLogin}>
+            <Input id="emailLogin" type="email" label="Email" parentMethod={(e) => setEmail(e.target.value)} />
+            <Input id="passwordLogin" type="password" label="Contraseña" parentMethod={(e) => setPassword(e.target.value)} />
+            <Button label="Ingresar" style="Primary" isSubmit />
             <p className="font-[family-name:var(--font-body)] text-sm text-gray-900 text-center">
               No tienes una cuenta, <Link href='/register' title="Ingresar a formulario de registro" className="font-bold hover:underline">registrarse</Link>
             </p>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
           </form>
         </div>
         <div className="w-full h-full min-h-[470px] max-h-[570px] p-10 bg-tertiary bg-decorate bg-no-repeat bg-right-bottom  bg-[length:85%_auto] md:bg-[length:45%_auto] lg:bg-[length:65%_auto] rounded-2xl overflow-hidden">

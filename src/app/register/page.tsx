@@ -81,8 +81,7 @@ export default function RegisterPage() {
               <Input id="confirmPasswordRegister" type="password" label="Confirmar contraseña" />
             </div>
             <Select id="selectRol" label="Seleccionar Rol" options={ROLES_OPTIONS} parentMethod={(e) => setRole(e.target.value)} />
-            <Button label="Crear cuenta" style="Primary" />
-            <button type="submit">Registrar</button>
+            <Button label="Crear cuenta" style="Primary" isSubmit />
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {success && <p style={{ color: 'green' }}>{success}</p>}
             <p className="font-[family-name:var(--font-body)] text-sm text-gray-900 text-center">
