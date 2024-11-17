@@ -111,7 +111,7 @@ export const DASHBOARD_MENU: SideBarsProps = {
   'items': [
     {
       'icon': {
-        'name': 'grid',
+        'name': 'home',
         'size': 18,
       },
       'label': 'Dashboard',
