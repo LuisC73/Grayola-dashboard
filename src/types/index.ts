@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 // General
 interface ImageProps {
   src: string;
@@ -34,11 +36,23 @@ export interface IconProps {
   color?: string;
 }
 
+export interface IconLinkProps {
+  icon: IconProps;
+  href: string;
+  title: string;
+  ariaLabel: string;
+}
+
 export interface InputProps {
   id: string;
   type: 'text' | 'email' | 'password';
   label: string;
   parentMethod?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface ModalProps {
+  onClose: () => void;
+  children: ReactNode;
 }
 
 export interface SelectProps extends Omit<InputProps, 'type' | 'parentMethod'> {
@@ -58,7 +72,8 @@ export interface HomeProps {
   title: string;
   description: string;
   button: ButtonLinkProps;
-  image?: ImageProps;
+  socialMedia: IconLinkProps[];
+  image: ImageProps;
 }
 
 export interface AuthProps {
@@ -75,7 +90,7 @@ export type roleType = 'customer' | 'project_manager' | 'designer';
 export interface RolesOptions {
   id: roleType;
   label: string;
-} 
+}
 
 export interface User {
   id: string;

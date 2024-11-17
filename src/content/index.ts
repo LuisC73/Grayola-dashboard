@@ -37,6 +37,32 @@ export const HOME_CONTENT: HomeProps = {
     'title': 'Conocer más acerca del dashboard',
     'style': 'Primary',
   },
+  'socialMedia': [
+    {
+      'icon': {
+        'name': 'linkedin',
+        'size': 30
+      },
+      'href': 'https://www.linkedin.com/company/grayola',
+      'title': 'Ingresar al perfil oficial de linkedin',
+      ariaLabel: 'Botón para ingresar al perfil oficial de linkedin'
+    },
+    {
+      'icon': {
+        'name': 'instagram',
+        'size': 30
+      },
+      'href': 'https://www.instagram.com/grayola.io/',
+      'title': 'Ingresar al perfil oficial de instagram',
+      ariaLabel: 'Botón para ingresar al perfil oficial de instagram'
+    }
+  ],
+  'image': {
+    'src': '/images/logo-variant.svg',
+    'alt': 'Grayola imagen',
+    'width': 340,
+    'height': 200
+  }
 };
 
 export const LOGIN_CONTENT: AuthProps = {
@@ -85,7 +111,7 @@ export const DASHBOARD_MENU: SideBarsProps = {
   'items': [
     {
       'icon': {
-        'name': 'grid',
+        'name': 'home',
         'size': 18,
       },
       'label': 'Dashboard',

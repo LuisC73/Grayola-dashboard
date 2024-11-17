@@ -1,9 +1,24 @@
+"use client";
+
+import { Button, Modal } from "@/components";
+import { useState } from "react";
+
 export default function ProjectsPage() {
+  const [isModalActive, setIsModalActive] = useState<boolean>(false);
+
+  const handleModalClose = () => {
+    setIsModalActive(false);
+  };
+
+  const handleModalOpen = () => {
+    setIsModalActive(true);
+  }
+
   return (
     <div className="w-full grid grid-rows-[auto_1fr]">
-      <div className="p-5 border-b border-gray-300">
+      <div className="p-5 border-b border-gray-300 grid grid-rows-1 grid-cols-[1fr_200px] items-center">
         <h1 className="font-[family-name:var(--font-title)] text-black text-base">Proyectos</h1>
-        <span></span>
+        <Button label="Crear proyecto" style="Primary" parentMethod={handleModalOpen} />
       </div>
       <div className="p-5 grid grid-rows-[auto_1fr]">
         <div>
@@ -14,6 +29,11 @@ export default function ProjectsPage() {
         </div>
         <div></div>
       </div>
+      {isModalActive && (
+        <Modal onClose={handleModalClose}>
+          Prueba
+        </Modal>
+      )}
     </div>
   )
 }
