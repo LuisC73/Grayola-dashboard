@@ -75,8 +75,12 @@ export interface LoginFormProps {
   errorMsg: string | null;
 }
 
-// Content
+export interface RegisterFormProps extends Omit<LoginFormProps, 'onLogin'>  {
+  onRegister: (e: FormEvent) => void;
+  onRole: (e: ChangeEvent<HTMLSelectElement>) => void
+}
 
+// Content
 export interface HomeProps {
   title: string;
   description: string;
@@ -113,12 +117,4 @@ export interface Project {
   description: string;
   file: string;
   assigned_role: roleType;
-}
-
-
-// Custom hooks
-
-export interface useLoginProps {
-  email: string;
-  password: string;
 }
