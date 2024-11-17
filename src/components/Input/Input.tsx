@@ -1,3 +1,5 @@
+'use client';
+
 import { InputProps } from '@types';
 
 export function Input({ id, type, label, parentMethod }: InputProps) {
@@ -6,7 +8,7 @@ export function Input({ id, type, label, parentMethod }: InputProps) {
       <label htmlFor={id} className='font-[family-name:var(--font-body)] text-sm text-gray-900'>{label}</label>
       <input
         type={type}
-        onInput={parentMethod}
+        onChange={(e) => parentMethod && parentMethod(e)}
         id={id}
         className='w-full text-gray-900 font-[family-name:var(--font-body)] text-sm border border-gray-300 p-2 rounded-2xl'
       />

@@ -1,11 +1,61 @@
+'use client';
+
 import { LOGIN_CONTENT, REGISTER_CONTENT } from "@/content";
 import { Button, Input, Select } from "@components";
 import Image from "next/image";
 import Link from "next/link";
+import { FormEvent, useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 const roles: string[] = ['Cliente', 'Project Manager', 'Diseñador'];
 
 export default function RegisterPage() {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [role, setRole] = useState<string>('cliente');
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const handleRegister = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if(signUpError) throw new Error(signUpError.message);
+
+      if(signUpData.user) {
+        const { error: insertError } = await supabase
+          .from('users')
+          .insert([{ id: signUpData.user.id, email, role}]);
+
+        if (insertError) throw new Error(insertError.message);
+
+        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+
+        if (sessionError) throw new Error(sessionError.message);
+
+        if (sessionData?.session) {
+          document.cookie = `supabase-auth-token=${sessionData.session.access_token}; path=/; max-age=${60 * 60 * 24 * 7}; secure; SameSite=Strict`;
+        }
+        
+        setSuccess('Usuario registrado correctamente');
+      }
+
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message)
+      } else {
+        setError("An unknown error occurred");
+      }
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 grid-rows-1 min-h-screen justify-items-center">
       <main className="px-10 py-5 grid grid-cols-1 lg:grid-cols-2 items-center lg:justify-items-center gap-10 max-w-[1400px]">
@@ -23,14 +73,17 @@ export default function RegisterPage() {
             <h1 className="font-[family-name:var(--font-title)] text-xl md:text-2xl lg:text-3xl">{REGISTER_CONTENT.title}</h1>
             <p className="font-[family-name:var(--font-body)] text-base text-gray-900">{REGISTER_CONTENT.description}</p>
           </div>
-          <form className="flex flex-col gap-5">
-            <Input id="emailRegister" type="email" label="Email" />
+          <form className="flex flex-col gap-5" onSubmit={handleRegister}>
+            <Input id="emailRegister" type="email" label="Email" parentMethod={(e) => setEmail(e.target.value)} />
             <div className="flex flex-wrap md:flex-nowrap gap-5">
-              <Input id="passwordRegister" type="password" label="Contraseña" />
+              <Input id="passwordRegister" type="password" label="Contraseña" parentMethod={(e) => setPassword(e.target.value)}  />
               <Input id="confirmPasswordRegister" type="password" label="Confirmar contraseña" />
             </div>
-            <Select id="selectRol" label="Seleccionar Rol" options={roles} />
+            <Select id="selectRol" label="Seleccionar Rol" options={roles} parentMethod={(e) => setRole(e.target.value)} />
             <Button label="Crear cuenta" style="Primary" />
+            <button type="submit">Registrar</button>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {success && <p style={{ color: 'green' }}>{success}</p>}
             <p className="font-[family-name:var(--font-body)] text-sm text-gray-900 text-center">
               Ya tienes una cuenta, <Link href='/login' title="Ingresar a formulario de inicio de sesión" className="font-bold hover:underline">Iniciar sesión</Link>
             </p>

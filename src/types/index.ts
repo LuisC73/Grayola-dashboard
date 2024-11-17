@@ -1,5 +1,4 @@
 // General
-
 interface ImageProps {
   src: string;
   alt: string;
@@ -38,11 +37,12 @@ export interface InputProps {
   id: string;
   type: 'text' | 'email' | 'password';
   label: string;
-  parentMethod?: () => void;
+  parentMethod?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface SelectProps extends Omit<InputProps, 'type'> {
+export interface SelectProps extends Omit<InputProps, 'type' | 'parentMethod'> {
   options: string[];
+  parentMethod?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export interface SideBarsProps {
@@ -66,4 +66,23 @@ export interface AuthProps {
   description: string;
   subtitle: string;
   button: ButtonLinkProps;
+}
+
+// User
+
+export type roleType = 'cliente' | 'project_manager' | 'diseñador';
+
+
+export interface User {
+  id: string;
+  email: string;
+  role: roleType;
+}
+
+export interface Project {
+  id: string;
+  name: string;
+  description: string;
+  file: string;
+  assigned_role: 'cliente' | 'project_manager' | 'diseñador';
 }
