@@ -1,4 +1,4 @@
-import { AuthProps, HeaderProps, HomeProps, SideBarsProps } from '@types';
+import { AuthProps, HeaderProps, HomeProps, RolesOptions, SideBarsProps } from '@types';
 
 export const CONFIG = {
   'openGraph': {},
@@ -110,4 +110,19 @@ export const DASHBOARD_MENU: SideBarsProps = {
       'size': 16
     }
   }
-}
+};
+
+export const ROLES_OPTIONS: RolesOptions[] = [
+  {
+    'id': 'customer',
+    'label': 'Cliente'
+  },
+  {
+    'id': 'project_manager',
+    'label': 'Project Manager'
+  },
+  {
+    'id': 'designer',
+    'label': 'Diseñador'
+  }
+]

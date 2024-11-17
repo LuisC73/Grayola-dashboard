@@ -41,7 +41,7 @@ export interface InputProps {
 }
 
 export interface SelectProps extends Omit<InputProps, 'type' | 'parentMethod'> {
-  options: string[];
+  options: RolesOptions[];
   parentMethod?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -69,9 +69,12 @@ export interface AuthProps {
 }
 
 // User
+export type roleType = 'customer' | 'project_manager' | 'designer';
 
-export type roleType = 'cliente' | 'project_manager' | 'diseñador';
-
+export interface RolesOptions {
+  id: roleType;
+  label: string;
+} 
 
 export interface User {
   id: string;
@@ -84,5 +87,5 @@ export interface Project {
   name: string;
   description: string;
   file: string;
-  assigned_role: 'cliente' | 'project_manager' | 'diseñador';
+  assigned_role: roleType;
 }

@@ -5,12 +5,16 @@ import { SideBarsProps } from "@/types";
 import { Icon, Button } from "@components";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from 'next/navigation'
 
 export function SideBar({ logo, items, button }: SideBarsProps) {
+  const router = useRouter()
+
   const handleLogout = async () => {
     try {
       await supabase.auth.signOut();
       document.cookie = "supabase-auth-token=; path=/; max-age=0";
+      router.push('/dashboard')
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.error(err.message)

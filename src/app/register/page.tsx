@@ -1,18 +1,18 @@
 'use client';
 
-import { LOGIN_CONTENT, REGISTER_CONTENT } from "@/content";
+import { LOGIN_CONTENT, REGISTER_CONTENT, ROLES_OPTIONS } from "@/content";
 import { Button, Input, Select } from "@components";
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { supabase } from "@/lib/supabase";
-
-const roles: string[] = ['Cliente', 'Project Manager', 'Diseñador'];
+import { useRouter } from 'next/navigation'
 
 export default function RegisterPage() {
+  const router = useRouter()
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [role, setRole] = useState<string>('cliente');
+  const [role, setRole] = useState<string>('client');
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
@@ -45,6 +45,7 @@ export default function RegisterPage() {
         }
         
         setSuccess('Usuario registrado correctamente');
+        router.push('/dashboard')
       }
 
     } catch (err: unknown) {
@@ -79,7 +80,7 @@ export default function RegisterPage() {
               <Input id="passwordRegister" type="password" label="Contraseña" parentMethod={(e) => setPassword(e.target.value)}  />
               <Input id="confirmPasswordRegister" type="password" label="Confirmar contraseña" />
             </div>
-            <Select id="selectRol" label="Seleccionar Rol" options={roles} parentMethod={(e) => setRole(e.target.value)} />
+            <Select id="selectRol" label="Seleccionar Rol" options={ROLES_OPTIONS} parentMethod={(e) => setRole(e.target.value)} />
             <Button label="Crear cuenta" style="Primary" />
             <button type="submit">Registrar</button>
             {error && <p style={{ color: 'red' }}>{error}</p>}
