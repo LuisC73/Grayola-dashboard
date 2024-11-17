@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ChangeEvent, FormEvent, ReactNode } from "react";
 
 // General
 interface ImageProps {
@@ -8,7 +8,7 @@ interface ImageProps {
   height: number;
 }
 
-// Components
+// Components ui
 export interface ButtonProps {
   label: string;
   icon?: IconProps;
@@ -47,7 +47,7 @@ export interface InputProps {
   id: string;
   type: 'text' | 'email' | 'password';
   label: string;
-  parentMethod?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  parentMethod?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface ModalProps {
@@ -57,13 +57,22 @@ export interface ModalProps {
 
 export interface SelectProps extends Omit<InputProps, 'type' | 'parentMethod'> {
   options: RolesOptions[];
-  parentMethod?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  parentMethod?: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export interface SideBarsProps {
   logo: ImageProps;
   items: { icon: IconProps; label: string; title: string; href: string }[];
   button: ButtonProps;
+}
+
+
+// Components forms
+export interface LoginFormProps {
+  onLogin: (e: FormEvent) => void;
+  onEmail: (e: ChangeEvent<HTMLInputElement>) => void;
+  onPassword: (e: ChangeEvent<HTMLInputElement>) => void;
+  errorMsg: string | null;
 }
 
 // Content
@@ -104,4 +113,12 @@ export interface Project {
   description: string;
   file: string;
   assigned_role: roleType;
+}
+
+
+// Custom hooks
+
+export interface useLoginProps {
+  email: string;
+  password: string;
 }
