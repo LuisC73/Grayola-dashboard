@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ChangeEvent, FormEvent, ReactNode } from "react";
 
 // General
 interface ImageProps {
@@ -8,7 +8,7 @@ interface ImageProps {
   height: number;
 }
 
-// Components
+// Components ui
 export interface ButtonProps {
   label: string;
   icon?: IconProps;
@@ -47,7 +47,7 @@ export interface InputProps {
   id: string;
   type: 'text' | 'email' | 'password';
   label: string;
-  parentMethod?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  parentMethod?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface ModalProps {
@@ -57,7 +57,7 @@ export interface ModalProps {
 
 export interface SelectProps extends Omit<InputProps, 'type' | 'parentMethod'> {
   options: RolesOptions[];
-  parentMethod?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  parentMethod?: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export interface SideBarsProps {
@@ -66,8 +66,27 @@ export interface SideBarsProps {
   button: ButtonProps;
 }
 
-// Content
 
+// Components forms
+export interface LoginFormProps {
+  onLogin: (e: FormEvent) => void;
+  onEmail: (e: ChangeEvent<HTMLInputElement>) => void;
+  onPassword: (e: ChangeEvent<HTMLInputElement>) => void;
+  errorMsg: string | null;
+}
+
+export interface RegisterFormProps extends Omit<LoginFormProps, 'onLogin'>  {
+  onRegister: (e: FormEvent) => void;
+}
+
+export interface CreateUserFormProps {
+  onCreate: (e: FormEvent) => void;
+  onName: (e: ChangeEvent<HTMLInputElement>) => void;
+  onRole: (e: ChangeEvent<HTMLSelectElement>) => void;
+  errorMsg: string | null;
+}
+
+// Content
 export interface HomeProps {
   title: string;
   description: string;

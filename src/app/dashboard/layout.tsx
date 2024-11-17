@@ -1,4 +1,4 @@
-import { SideBar } from "@/components/SideBar/SideBar"
+import { SideBar } from "@/components/layout/SideBar/SideBar"
 import { DASHBOARD_MENU } from "@/content"
 
 export default function Layout ({ children }: { children: React.ReactNode }) {
