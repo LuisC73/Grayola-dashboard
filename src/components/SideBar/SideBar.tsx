@@ -33,7 +33,9 @@ export function SideBar({ logo, items, button }: SideBarsProps) {
   return (
     <aside className="relative w-full h-fit md:h-full bg-custom bg-no-repeat border-r border-gray-300">
       <div className='hidden w-full h-full p-5 md:grid grid-rows-[auto_1fr_auto] bg-gray-200 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10'>
-        <Image src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} />
+        <Link href='/' title='Volver al inicio'>
+          <Image src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} />
+        </Link>
         <ul className="flex flex-col gap-4 pt-10">  
           {items?.map((item, index) => (
             <li key={index}>
@@ -47,7 +49,9 @@ export function SideBar({ logo, items, button }: SideBarsProps) {
         <Button {...button} parentMethod={handleLogout} />
       </div>
       <div className='flex md:hidden items-center justify-between p-5 border-b border-gray-300'>
-        <Image src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} />
+        <Link href='/' title='Volver al inicio'>
+          <Image src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} />
+        </Link>
         <button className='cursor-pointer' onClick={handleActiveMenu}>
           <Icon name='menu' size={32} />
         </button>
