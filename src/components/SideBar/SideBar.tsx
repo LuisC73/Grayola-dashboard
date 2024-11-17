@@ -52,7 +52,7 @@ export function SideBar({ logo, items, button }: SideBarsProps) {
           <Icon name='menu' size={32} />
         </button>
       </div>
-      <div className={`w-4/5 h-screen absolute right-0 top-0 p-5 grid-rows-[auto_1fr] bg-gray-200 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 border-l border-gray-300 ${isMenuActive ? 'grid' : 'hidden'}`}>
+      <div className={`w-4/5 h-screen absolute right-0 top-0 p-5 grid-rows-[auto_1fr_auto] bg-gray-200 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 border-l border-gray-300 ${isMenuActive ? 'grid' : 'hidden'}`}>
         <button className='cursor-pointer justify-self-end' onClick={handleActiveMenu}>
           <Icon name='close' size={32} />
         </button>
@@ -66,6 +66,7 @@ export function SideBar({ logo, items, button }: SideBarsProps) {
             </li>
           ))}
         </ul>
+        <Button {...button} parentMethod={handleLogout} />
       </div>
     </aside>
   )
