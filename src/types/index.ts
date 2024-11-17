@@ -34,6 +34,13 @@ export interface IconProps {
   color?: string;
 }
 
+export interface IconLinkProps {
+  icon: IconProps;
+  href: string;
+  title: string;
+  ariaLabel: string;
+}
+
 export interface InputProps {
   id: string;
   type: 'text' | 'email' | 'password';
@@ -58,7 +65,8 @@ export interface HomeProps {
   title: string;
   description: string;
   button: ButtonLinkProps;
-  image?: ImageProps;
+  socialMedia: IconLinkProps[];
+  image: ImageProps;
 }
 
 export interface AuthProps {

@@ -3,6 +3,7 @@ export * from './ButtonLink/ButtonLink';
 export * from './Card/Card';
 export * from './Header/Header';
 export * from './Icon/Icon';
+export * from './IconLink/IconLink';
 export * from './Input/Input';
 export * from './Modal/Modal';
 export * from './Select/Select';
