@@ -77,7 +77,13 @@ export interface LoginFormProps {
 
 export interface RegisterFormProps extends Omit<LoginFormProps, 'onLogin'>  {
   onRegister: (e: FormEvent) => void;
-  onRole: (e: ChangeEvent<HTMLSelectElement>) => void
+}
+
+export interface CreateUserFormProps {
+  onCreate: (e: FormEvent) => void;
+  onName: (e: ChangeEvent<HTMLInputElement>) => void;
+  onRole: (e: ChangeEvent<HTMLSelectElement>) => void;
+  errorMsg: string | null;
 }
 
 // Content

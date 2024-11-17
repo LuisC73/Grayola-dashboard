@@ -1,7 +1,5 @@
 import { Button } from '@/components/ui/Button/Button';
 import { Input } from '@/components/ui/Input/Input';
-import { Select } from '@/components/ui/Select/Select';
-import { ROLES_OPTIONS } from '@/content';
 import { RegisterFormProps } from '@/types';
 import Link from 'next/link';
 
@@ -9,7 +7,6 @@ export function RegisterForm({
   onRegister,
   onEmail,
   onPassword,
-  onRole,
   errorMsg,
 }: RegisterFormProps) {
   return (
@@ -25,24 +22,11 @@ export function RegisterForm({
             label="Email"
             parentMethod={onEmail}
           />
-          <div className="flex flex-wrap md:flex-nowrap gap-5">
-            <Input
-              id="passwordRegister"
-              type="password"
-              label="Contraseña"
-              parentMethod={onPassword}
-            />
-            <Input
-              id="confirmPasswordRegister"
-              type="password"
-              label="Confirmar contraseña"
-            />
-          </div>
-          <Select
-            id="selectRol"
-            label="Seleccionar Rol"
-            options={ROLES_OPTIONS}
-            parentMethod={onRole}
+          <Input
+            id="passwordRegister"
+            type="password"
+            label="Contraseña"
+            parentMethod={onPassword}
           />
           <Button
             label="Crear cuenta"

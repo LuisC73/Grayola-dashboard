@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase';
+import { saveTokenToCookie } from '@/utils/cookie';
 
 export function useLogin() {
   const login = async (email: string, password: string) => {
@@ -16,9 +17,8 @@ export function useLogin() {
         if (sessionError) throw new Error(sessionError.message);
 
         if (sessionData?.session) {
-          document.cookie = `supabase-auth-token=${
-            sessionData.session.access_token
-          }; path=/; max-age=${60 * 60 * 24 * 7}; secure; SameSite=Strict`;
+          const token = sessionData.session.access_token;
+          saveTokenToCookie(token);
         }
       }
 
