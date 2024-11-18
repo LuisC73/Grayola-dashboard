@@ -115,6 +115,11 @@ export interface AuthProps {
   button: ButtonLinkProps;
 }
 
+export interface RegisterPagesProps {
+  title: string;
+  description: string;
+}
+
 // User
 export type roleType = 'customer' | 'project_manager' | 'designer';
 

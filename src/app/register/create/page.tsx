@@ -4,6 +4,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CreateUserForm } from '@/components/forms/CreateUserForm/CreateUserForm';
 import { createUser } from '@/services/createUser';
+import { CREATE_CONTENT } from '@/content';
 
 export default function CreatePage() {
   const [name, setName] = useState<string>('');
@@ -35,7 +36,15 @@ export default function CreatePage() {
   };
 
   return (
-    <div>
+    <div className='flex flex-col gap-5'>
+      <div className="flex flex-col gap-2 border-b border-gray-300 pb-5">
+        <h1 className="font-[family-name:var(--font-title)] text-xl md:text-2xl lg:text-3xl">
+          {CREATE_CONTENT.title}
+        </h1>
+        <p className="font-[family-name:var(--font-body)] text-base text-gray-900">
+          {CREATE_CONTENT.description}
+        </p>
+      </div>
       <CreateUserForm
         onCreate={handleCreateUser}
         onName={handleName}
