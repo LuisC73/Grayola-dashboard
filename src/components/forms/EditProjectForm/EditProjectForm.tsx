@@ -1,17 +1,10 @@
 'use client';
 
-import { Alert, Button, Input, Select } from '@components';
+import { Alert, Button, Input, Select, TextArea } from '@components';
 import { EditProjectFormProps } from '@types';
 
-export function EditProjectForm({
-  onSubmit,
-  changeTitle,
-  changeDescription,
-  changeDesigner,
-  options,
-  errorMsg,
-}: EditProjectFormProps) {
-  const designers = options.map((item) => ({
+export function EditProjectForm(props: EditProjectFormProps) {
+  const designers = props?.options?.map((item) => ({
     id: item.id,
     label: item.name,
   }));
@@ -21,31 +14,36 @@ export function EditProjectForm({
       <div className="flex flex-col gap-5">
         <form
           className="flex flex-col gap-5"
-          onSubmit={onSubmit}
+          onSubmit={props.onSubmit}
         >
           <Input
             id="titleProject"
             type="text"
             label="Titulo"
-            parentMethod={changeTitle}
+            initialValue={props.data.title}
+            parentMethod={props.changeTitle}
             isRequired
           />
-          <Input
+          <TextArea
             id="descriptionProject"
-            type="text"
             label="Descripción"
-            parentMethod={changeDescription}
+            initialValue={props.data.description}
+            parentMethod={props.changeDescription}
             isRequired
           />
-          {designers && (
+          {designers?.length > 0 ? (
             <Select
               id="selectDesigner"
               label="Asignar diseñador"
               options={designers}
-              initialOption={designers[0]?.id}
-              parentMethod={changeDesigner}
+              initialValue={props.data.assigned_to ?? ''}
+              parentMethod={props.changeDesigner}
               isRequired
             />
+          ) : (
+            <p className="font-[family-name:var(--font-body)] text-sm text-gray-900">
+              No hay diseñadores disponibles
+            </p>
           )}
           <Button
             label="Editar proyecto"
@@ -54,11 +52,11 @@ export function EditProjectForm({
           />
         </form>
       </div>
-      {errorMsg && (
+      {props.errorMsg && (
         <Alert
           type="Error"
           title="Ha ocurrido un error"
-          description={errorMsg}
+          description={props.errorMsg}
         />
       )}
     </div>

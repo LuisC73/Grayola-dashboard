@@ -1,7 +1,6 @@
 'use client';
 
-import { CardReport } from '@/components/ui/CardReport/CardReport';
-import { CardUser } from '@/components/ui/CardUser/CardUser';
+import { CardReport, CardUser } from '@components';
 import { useUser } from '@/context/UserContext';
 import { getUserProjectsCount } from '@/services/getUser';
 import { useEffect, useState } from 'react';

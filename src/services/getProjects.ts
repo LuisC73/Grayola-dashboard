@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase';
+import { getProjectsData } from '@/types';
 
 export const getProjects = async () => {
   try {
@@ -17,20 +18,19 @@ export const getProjects = async () => {
 
     let query = supabase.from('projects').select('*');
 
-    if (userRole.role === 'client') {
+    if (userRole.role === 'customer') {
       query = query.eq('user_id', userId);
     } else if (userRole.role === 'designer') {
       query = query.eq('assigned_to', userId);
     }
 
-    const { data, error } = await query;
+    const { data, error }: getProjectsData  = await query;
 
     if (error) throw new Error(error.message);
 
-    return { success: true, projects: data };
+    return { projects: data, error: null };
   } catch (err: unknown) {
     return {
-      success: false,
       projects: null,
       error: err instanceof Error ? err.message : 'Unknown error',
     };

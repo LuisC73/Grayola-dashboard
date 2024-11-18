@@ -1,33 +1,27 @@
 'use client';
 
-import { Alert, Button, Input } from '@components';
+import { Alert, Button, Input, TextArea } from '@components';
 import { CreateProjectFormProps } from '@types';
 
-export function CreateProjectForm({
-  onSubmit,
-  changeTitle,
-  changeDescription,
-  errorMsg,
-}: CreateProjectFormProps) {
+export function CreateProjectForm(props: CreateProjectFormProps) {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-col gap-5">
         <form
           className="flex flex-col gap-5"
-          onSubmit={onSubmit}
+          onSubmit={props.onSubmit}
         >
           <Input
             id="titleProject"
             type="text"
             label="Titulo"
-            parentMethod={changeTitle}
+            parentMethod={props.changeTitle}
             isRequired
           />
-          <Input
+          <TextArea
             id="descriptionProject"
-            type="text"
             label="Descripción"
-            parentMethod={changeDescription}
+            parentMethod={props.changeDescription}
             isRequired
           />
           <Button
@@ -37,11 +31,11 @@ export function CreateProjectForm({
           />
         </form>
       </div>
-      {errorMsg && (
+      {props.errorMsg && (
         <Alert
           type="Error"
           title="Ha ocurrido un error"
-          description={errorMsg}
+          description={props.errorMsg}
         />
       )}
     </div>

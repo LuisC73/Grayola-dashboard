@@ -3,6 +3,7 @@ import {
   HeaderProps,
   HomeProps,
   RegisterPagesProps,
+  Roles,
   SelectOptionsProps,
   SideBarsProps,
 } from '@types';
@@ -170,3 +171,9 @@ export const ROLES_OPTIONS: SelectOptionsProps[] = [
     'label': 'Diseñador',
   },
 ];
+
+export const ROLES: Roles = {
+  'customer' : 'Cliente',
+  'project_manager': 'Project Manager',
+  'designer': 'Diseñador'
+};

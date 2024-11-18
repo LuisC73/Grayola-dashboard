@@ -1,4 +1,4 @@
-import { SideBar } from "@/components/layout/SideBar/SideBar"
+import { SideBar } from "@components"
 import { DASHBOARD_MENU } from "@/content"
 import { UserProvider } from "@/context/UserContext"
 

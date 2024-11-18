@@ -2,7 +2,7 @@
 
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { RegisterForm } from '@/components/forms/RegisterForm/RegisterForm';
+import { RegisterForm } from '@components';
 import { registerUser } from '@/services/register';
 import { REGISTER_CONTENT } from '@/content';
 

@@ -12,10 +12,9 @@ export const getDesigners = async () => {
 
     if (error) throw new Error(error.message);
 
-    return { success: true, designers: data };
+    return { designers: data, error: null };
   } catch (err: unknown) {
     return {
-      success: false,
       designers: null,
       error: err instanceof Error ? err.message : 'Unknown error',
     };
