@@ -3,7 +3,8 @@ import {
   HeaderProps,
   HomeProps,
   RegisterPagesProps,
-  RolesOptions,
+  Roles,
+  SelectOptionsProps,
   SideBarsProps,
 } from '@types';
 
@@ -156,7 +157,7 @@ export const DASHBOARD_MENU: SideBarsProps = {
   },
 };
 
-export const ROLES_OPTIONS: RolesOptions[] = [
+export const ROLES_OPTIONS: SelectOptionsProps[] = [
   {
     'id': 'customer',
     'label': 'Cliente',
@@ -170,3 +171,9 @@ export const ROLES_OPTIONS: RolesOptions[] = [
     'label': 'Diseñador',
   },
 ];
+
+export const ROLES: Roles = {
+  'customer' : 'Cliente',
+  'project_manager': 'Project Manager',
+  'designer': 'Diseñador'
+};

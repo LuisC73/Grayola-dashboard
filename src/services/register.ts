@@ -19,10 +19,9 @@ export const registerUser = async (email: string, password: string) => {
 
     return { success: true, error: null };
   } catch (err: unknown) {
-    if (err instanceof Error) {
-      return { success: false, error: err.message };
-    } else {
-      return { success: false, error: 'An unknown error occurred' };
-    }
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Unknown error',
+    };
   }
 };

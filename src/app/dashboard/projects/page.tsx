@@ -1,39 +1,93 @@
-"use client";
+'use client';
 
-import { Button, Modal } from "@/components";
-import { useState } from "react";
+import { Alert, ButtonLink, Card } from '@/components';
+import { ROLES } from '@/content';
+import { useUser } from '@/context/UserContext';
+import { deleteProject } from '@/services/deleteProject';
+import { getProjects } from '@/services/getProjects';
+import { Project } from '@/types';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function ProjectsPage() {
-  const [isModalActive, setIsModalActive] = useState<boolean>(false);
+  const [projects, setProjects] = useState<Project[] | null>(null);
+  const [error, setError] = useState<string>('');
+  const [success, setSuccess] = useState<boolean>(false);
+  const { user } = useUser();
+  const router = useRouter();
 
-  const handleModalClose = () => {
-    setIsModalActive(false);
+  const userRole: string = ROLES?.[user.role] ?? 'Cliente';
+
+  useEffect(() => {
+    const fetchProject = async () => {
+      const { projects, error } = await getProjects();
+
+      if (projects) setProjects(projects);
+      if (error) setError(error);
+    };
+
+    fetchProject();
+  }, []);
+
+  const handleEditProject = (id: string) => {
+    router.push(`/dashboard/projects/edit?id=${id}`);
   };
 
-  const handleModalOpen = () => {
-    setIsModalActive(true);
-  }
+  const handleDeleteProject = async (id: string) => {
+    const { success, error } = await deleteProject(id);
+
+    if(success) setSuccess(success);
+    if(error) setError(error);
+  };
 
   return (
     <div className="w-full grid grid-rows-[auto_1fr]">
-      <div className="p-5 border-b border-gray-300 grid grid-rows-1 grid-cols-[1fr_200px] items-center">
+      <div className="p-5 border-b border-gray-300 grid grid-rows-1 grid-cols-[1fr_auto] items-center">
         <h1 className="font-[family-name:var(--font-title)] text-black text-base">Proyectos</h1>
-        <Button label="Crear proyecto" style="Primary" parentMethod={handleModalOpen} />
+        {user.role === 'customer' ? (
+          <ButtonLink
+            label="Crear proyecto"
+            style="Primary"
+            href="/dashboard/projects/create"
+            title="Crear un nuevo proyecto"
+          />
+        ) : (
+          <span className="font-[family-name:var(--font-body)] text-sm">{userRole}</span>
+        )}
       </div>
-      <div className="p-5 grid grid-rows-[auto_1fr]">
-        <div>
-          <div className="flex flex-col gap-5">
-            <h2 className="font-[family-name:var(--font-title)] text-black text-base">Bienvenido</h2>
-            <p className="font-[family-name:var(--font-body)] text-gray-900 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id eligendi ea magni placeat molestiae impedit consectetur molestias dicta repellat sit velit at, porro qui debitis soluta voluptatem vitae esse delectus.</p>
-          </div>
+      <div className="p-5 grid grid-rows-1fr">
+        <div className="grid grid-cols-cards gap-5">
+          {projects?.map((project, index) => (
+            <Card
+              key={index}
+              userRole={user.role}
+              projectId={project.id}
+              title={project.title}
+              description={project.description}
+              onEdit={handleEditProject}
+              onDelete={handleDeleteProject}
+            />
+          ))}
         </div>
-        <div></div>
+        {error && (
+          <div>
+            <Alert
+              type="Error"
+              title="Error al cargar los proyectos"
+              description={error}
+            />
+          </div>
+        )}
+        {success && (
+          <div>
+            <Alert
+              type="Success"
+              title="Error al cargar los proyectos"
+              description={'Se elimino el proyecto'}
+            />
+          </div>
+        )}
       </div>
-      {isModalActive && (
-        <Modal onClose={handleModalClose}>
-          Prueba
-        </Modal>
-      )}
     </div>
-  )
+  );
 }

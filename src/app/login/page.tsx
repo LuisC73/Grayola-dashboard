@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { LoginForm } from '@/components/forms/LoginForm/LoginForm';
+import { LoginForm } from '@components';
 import { loginUser } from '@/services/login';
 
 export default function LoginPage() {

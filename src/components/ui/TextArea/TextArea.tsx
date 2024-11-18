@@ -1,8 +1,8 @@
 'use client';
 
-import { InputProps } from '@types';
+import { TextAreaProps } from '@types';
 
-export function Input(props: InputProps) {
+export function TextArea(props: TextAreaProps) {
   return (
     <div className="flex flex-col gap-1 w-full">
       <label
@@ -11,13 +11,13 @@ export function Input(props: InputProps) {
       >
         {props.label}
       </label>
-      <input
-        type={props.type}
-        id={props.id}
-        required={props.isRequired}
+      <textarea
+        name={props.id}
         defaultValue={props.initialValue ?? ''}
         onChange={(e) => props.parentMethod && props.parentMethod(e)}
-        className="w-full text-gray-900 font-[family-name:var(--font-body)] text-sm border border-gray-300 p-2 rounded-md"
+        id={props.id}
+        required={props.isRequired}
+        className="w-full text-gray-900 font-[family-name:var(--font-body)] text-sm border border-gray-300 p-2 rounded-md resize-y"
       />
     </div>
   );

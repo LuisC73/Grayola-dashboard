@@ -14,9 +14,7 @@ export function Button({ icon, label, ariaLabel, parentMethod, style }: ButtonPr
           : 'bg-transparent border-transparent hover:underline'
       }`}
     >
-      {icon && (
-        <Icon {...icon} />
-      )}
+      {icon && <Icon {...icon} />}
       {label}
     </button>
   );
