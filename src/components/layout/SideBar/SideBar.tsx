@@ -17,7 +17,7 @@ export function SideBar({ logo, items, button }: SideBarsProps) {
     try {
       await supabase.auth.signOut();
       document.cookie = "supabase-auth-token=; path=/; max-age=0";
-      router.push('/dashboard')
+      router.push('/')
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.error(err.message)
