@@ -22,7 +22,7 @@ export default {
         button: "0px 4px 0px 0px #000000"
       },
       gridTemplateColumns: {
-        cards: 'repeat(auto-fit, minmax(200px, 1fr))'
+        cards: 'repeat(auto-fit, minmax(280px, 1fr))'
       }
     },
   },
