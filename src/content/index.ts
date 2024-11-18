@@ -1,4 +1,11 @@
-import { AuthProps, HeaderProps, HomeProps, RolesOptions, SideBarsProps } from '@types';
+import {
+  AuthProps,
+  HeaderProps,
+  HomeProps,
+  RegisterPagesProps,
+  RolesOptions,
+  SideBarsProps,
+} from '@types';
 
 export const CONFIG = {
   'openGraph': {},
@@ -41,28 +48,28 @@ export const HOME_CONTENT: HomeProps = {
     {
       'icon': {
         'name': 'linkedin',
-        'size': 30
+        'size': 30,
       },
       'href': 'https://www.linkedin.com/company/grayola',
       'title': 'Ingresar al perfil oficial de linkedin',
-      ariaLabel: 'Botón para ingresar al perfil oficial de linkedin'
+      ariaLabel: 'Botón para ingresar al perfil oficial de linkedin',
     },
     {
       'icon': {
         'name': 'instagram',
-        'size': 30
+        'size': 30,
       },
       'href': 'https://www.instagram.com/grayola.io/',
       'title': 'Ingresar al perfil oficial de instagram',
-      ariaLabel: 'Botón para ingresar al perfil oficial de instagram'
-    }
+      ariaLabel: 'Botón para ingresar al perfil oficial de instagram',
+    },
   ],
   'image': {
     'src': '/images/home.svg',
     'alt': 'Grayola imagen',
     'width': 340,
-    'height': 200
-  }
+    'height': 200,
+  },
 };
 
 export const LOGIN_CONTENT: AuthProps = {
@@ -79,8 +86,8 @@ export const LOGIN_CONTENT: AuthProps = {
     'label': 'Volver al inicio',
     'title': 'Volver a la página principal',
     'href': '/',
-    'style': 'Secondary'
-  }
+    'style': 'Secondary',
+  },
 };
 
 export const REGISTER_CONTENT: AuthProps = {
@@ -92,19 +99,25 @@ export const REGISTER_CONTENT: AuthProps = {
   },
   'title': 'Registrarse',
   'description': '¡Bienvenido a Grayola! Regístrate y comienza a crear proyectos increíbles.',
-  'subtitle': 'Descubre la plataforma ideal para crear proyectos de manera eficiente y sin complicaciones.',
+  'subtitle':
+    'Descubre la plataforma ideal para crear proyectos de manera eficiente y sin complicaciones.',
   'button': {
     'label': 'Volver al inicio',
     'title': 'Volver a la página principal',
     'href': '/',
-    'style': 'Secondary'
-  }
+    'style': 'Secondary',
+  },
 };
 
-export const VERIFY_CONTENT = {
+export const VERIFY_CONTENT: RegisterPagesProps = {
   'title': 'Verificación',
-  'description': 'Revisa tu correo y confirma tu cuenta para comenzar a usar Grayola.'
-}
+  'description': 'Revisa tu correo y confirma tu cuenta para comenzar a usar Grayola.',
+};
+
+export const CREATE_CONTENT: RegisterPagesProps = {
+  'title': 'Crear cuenta',
+  'description': 'Crea tu cuenta con tu nombre y rol para comenzar a disfrutar de Grayola.',
+};
 
 export const DASHBOARD_MENU: SideBarsProps = {
   'logo': {
@@ -121,7 +134,7 @@ export const DASHBOARD_MENU: SideBarsProps = {
       },
       'label': 'Dashboard',
       'title': 'Ingresar al dashboard',
-      'href': '/dashboard'
+      'href': '/dashboard',
     },
     {
       'icon': {
@@ -130,30 +143,30 @@ export const DASHBOARD_MENU: SideBarsProps = {
       },
       'label': 'Proyectos',
       'title': 'Ingresar al dashboard',
-      'href': '/dashboard/projects'
-    }
+      'href': '/dashboard/projects',
+    },
   ],
   'button': {
     'label': 'Cerrar sesión',
     'style': 'Primary',
     'icon': {
       'name': 'logOut',
-      'size': 16
-    }
-  }
+      'size': 16,
+    },
+  },
 };
 
 export const ROLES_OPTIONS: RolesOptions[] = [
   {
     'id': 'customer',
-    'label': 'Cliente'
+    'label': 'Cliente',
   },
   {
     'id': 'project_manager',
-    'label': 'Project Manager'
+    'label': 'Project Manager',
   },
   {
     'id': 'designer',
-    'label': 'Diseñador'
-  }
-]
+    'label': 'Diseñador',
+  },
+];
