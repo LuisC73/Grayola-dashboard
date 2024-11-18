@@ -5,7 +5,7 @@ import { editProject } from '@/services/editProject';
 import { getDesigners } from '@/services/getDesigners';
 import { DesignerProps } from '@types';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { getProjectById } from '@/services/getProjectById';
 
 export default function EditProjectPage() {
@@ -17,8 +17,10 @@ export default function EditProjectPage() {
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
   const [options, setOptions] = useState<DesignerProps[]>([]);
+  const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const searchParams = useSearchParams();
   const projectId = searchParams.get('id') as string;
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProjectData = async () => {
@@ -40,8 +42,6 @@ export default function EditProjectPage() {
     const fetchDesigners = async () => {
       const { designers, error } = await getDesigners();
 
-      console.log('designers', designers);
-
       if (designers) setOptions(designers);
       if (error) setError(error);
     };
@@ -49,8 +49,6 @@ export default function EditProjectPage() {
     fetchProjectData();
     fetchDesigners();
   }, [projectId]);
-
-  console.log('data', projectData);
 
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -64,9 +62,13 @@ export default function EditProjectPage() {
 
     if (success) {
       setSuccess(success);
+      setIsModalActive(true);
     }
 
-    if (error) setError(error);
+    if (error) {
+      setIsModalActive(true);
+      setError(error);
+    }
   };
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -79,6 +81,11 @@ export default function EditProjectPage() {
 
   const handleChangeDesigner = (e: ChangeEvent<HTMLSelectElement>) => {
     setProjectData({ ...projectData, assigned_to: e.target.value });
+  };
+
+  const handleCloseModal = () => {
+    setIsModalActive(false);
+    router.push('/dashboard/projects');
   };
 
   return (
@@ -112,20 +119,20 @@ export default function EditProjectPage() {
           />
         </div>
       </div>
-      {error && (
+      {error && isModalActive && (
         <AlertModal
           type="Error"
-          title="Error"
+          title="Ha ocurrido un error"
           description={error}
-          onClose={() => {}}
+          onClose={handleCloseModal}
         />
       )}
-      {success && (
+      {success && isModalActive && (
         <AlertModal
           type="Success"
-          title="Proyecto creado"
-          description="Se creo el proyecto con exito"
-          onClose={() => {}}
+          title="Proyecto editado"
+          description="El proyecto se ha editado con éxito."
+          onClose={handleCloseModal}
         />
       )}
     </div>
