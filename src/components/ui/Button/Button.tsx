@@ -8,7 +8,7 @@ export function Button({ icon, label, ariaLabel, parentMethod, style }: ButtonPr
     <button
       aria-label={ariaLabel}
       onClick={parentMethod}
-      className={`text-sm w-full flex items-center justify-center gap-2 py-3 px-5 font-[family-name:var(--font-body)] rounded-2xl border border-black transition ease-out delay-150 cursor-pointer ${
+      className={`text-sm w-full flex items-center justify-center gap-2 py-3 px-5 font-[family-name:var(--font-body)] rounded-md border border-black transition ease-out delay-150 cursor-pointer ${
         style === 'Primary'
           ? 'bg-primary hover:bg-secondary shadow-button'
           : 'bg-transparent border-transparent hover:underline'

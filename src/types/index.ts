@@ -9,6 +9,16 @@ interface ImageProps {
 }
 
 // Components ui
+export interface AlertProps {
+  type: 'Error' | 'Info';
+  title: string;
+  description: string;
+}
+
+export interface AlertModalProps extends AlertProps {
+  onClose: () => void;
+}
+
 export interface ButtonProps {
   label: string;
   icon?: IconProps;
@@ -47,6 +57,7 @@ export interface InputProps {
   id: string;
   type: 'text' | 'email' | 'password';
   label: string;
+  isRequired: boolean;
   parentMethod?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -56,6 +67,7 @@ export interface ModalProps {
 }
 
 export interface SelectProps extends Omit<InputProps, 'type' | 'parentMethod'> {
+  initialOption: string;
   options: RolesOptions[];
   parentMethod?: (e: ChangeEvent<HTMLSelectElement>) => void;
 }

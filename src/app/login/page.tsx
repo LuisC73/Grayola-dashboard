@@ -5,20 +5,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useLogin } from '@/hooks/useLogin';
 import { LoginForm } from '@/components/forms/LoginForm/LoginForm';
+import { loginUser } from '@/services/login';
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>('');
-  const { login } = useLogin();
   const router = useRouter();
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
 
-    const { success, error: signInError } = await login(email, password);
+    const { success, error: signInError } = await loginUser(email, password);
 
     if (success) {
       router.push('/dashboard');
@@ -62,7 +61,7 @@ export default function LoginPage() {
             errorMsg={error}
           />
         </div>
-        <div className="w-full h-full min-h-[470px] max-h-[600px] p-5 lg:p-10 bg-tertiary bg-decorate bg-no-repeat bg-right-bottom  bg-[length:85%_auto] md:bg-[length:45%_auto] lg:bg-[length:65%_auto] rounded-2xl overflow-hidden">
+        <div className="w-full h-full min-h-[470px] max-h-[600px] p-5 lg:p-10 bg-tertiary bg-decorate bg-no-repeat bg-right-bottom  bg-[length:85%_auto] md:bg-[length:45%_auto] lg:bg-[length:65%_auto] rounded-md overflow-hidden">
           <div className="flex flex-col gap-5 w-4/5">
             <h2 className="font-[family-name:var(--font-title)] text-2xl">
               {LOGIN_CONTENT.subtitle}

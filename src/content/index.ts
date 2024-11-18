@@ -58,7 +58,7 @@ export const HOME_CONTENT: HomeProps = {
     }
   ],
   'image': {
-    'src': '/images/logo-variant.svg',
+    'src': '/images/home.svg',
     'alt': 'Grayola imagen',
     'width': 340,
     'height': 200
@@ -100,6 +100,11 @@ export const REGISTER_CONTENT: AuthProps = {
     'style': 'Secondary'
   }
 };
+
+export const VERIFY_CONTENT = {
+  'title': 'Verificación',
+  'description': 'Revisa tu correo y confirma tu cuenta para comenzar a usar Grayola.'
+}
 
 export const DASHBOARD_MENU: SideBarsProps = {
   'logo': {

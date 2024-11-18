@@ -1,3 +1,5 @@
+export * from './ui/Alert/Alert';
+export * from './ui/AlertModal/AlertModal';
 export * from './ui/Button/Button';
 export * from './ui/ButtonLink/ButtonLink';
 export * from './ui/Card/Card';
