@@ -18,9 +18,9 @@ export const getUserName = async () => {
 
     return { name: data[0]?.name || null, error: null };
   } catch (err: unknown) {
-    if (err instanceof Error) {
-      return { name: null, error: err.message };
-    }
-    return { name: null, error: 'An unknown error occurred' };
+    return {
+      name: null,
+      error: err instanceof Error ? err.message : 'Unknown error',
+    };
   }
 };
