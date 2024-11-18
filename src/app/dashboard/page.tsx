@@ -24,7 +24,7 @@ export default function DashboardPage() {
 
   return (
     <div className="w-full grid grid-rows-[auto_1fr]">
-      <div className="p-5 border-b border-gray-300 bg-custom bg-no-repeat bg-cover">
+      <div className="p-5 border-b border-gray-300">
         <h1 className="font-[family-name:var(--font-title)] text-black text-base">Dashboard</h1>
       </div>
       <div className="p-5 grid grid-rows-[auto_1fr]">
