@@ -58,7 +58,7 @@ export const HOME_CONTENT: HomeProps = {
     }
   ],
   'image': {
-    'src': '/images/logo-variant.svg',
+    'src': '/images/home.svg',
     'alt': 'Grayola imagen',
     'width': 340,
     'height': 200
