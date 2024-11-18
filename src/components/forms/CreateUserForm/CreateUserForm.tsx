@@ -38,6 +38,7 @@ export function CreateUserForm({ onCreate, onName, onRole, errorMsg }: CreateUse
             initialOption={ROLES_OPTIONS[0].label}
             options={ROLES_OPTIONS}
             parentMethod={onRole}
+            isRequired
           />
           <Button
             label="Crear cuenta"

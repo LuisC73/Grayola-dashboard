@@ -1,5 +1,5 @@
-import { supabase } from "@/lib/supabase";
-import { saveTokenToCookie } from "@/utils/cookie";
+import { supabase } from '@/lib/supabase';
+import { saveTokenToCookie } from '@/utils/cookie';
 
 export const loginUser = async (email: string, password: string) => {
   try {
