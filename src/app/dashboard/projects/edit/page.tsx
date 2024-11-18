@@ -21,6 +21,12 @@ export default function EditProjectPage() {
   const [projectId, setProjectId] = useState<string>('');
   const router = useRouter();
 
+  const initialOption: DesignerProps = {
+    'id': 'default',
+    'name': 'Selecciona uno de los diseñadores disponibles',
+    'email': 'default',
+  };
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const searchParams = new URLSearchParams(window.location.search);
@@ -49,7 +55,10 @@ export default function EditProjectPage() {
     const fetchDesigners = async () => {
       const { designers, error } = await getDesigners();
 
-      if (designers) setOptions(designers);
+      if (designers) {
+        setOptions([initialOption, ...designers]);
+      }
+
       if (error) setError(error);
     };
 
