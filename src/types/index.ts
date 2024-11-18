@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, ReactNode } from "react";
+import { ChangeEvent, FormEvent, ReactNode } from 'react';
 
 // General
 interface ImageProps {
@@ -66,9 +66,14 @@ export interface ModalProps {
   children: ReactNode;
 }
 
+export interface SelectOptionsProps {
+  id: string;
+  label: string;
+} 
+
 export interface SelectProps extends Omit<InputProps, 'type' | 'parentMethod'> {
   initialOption: string;
-  options: RolesOptions[];
+  options: SelectOptionsProps[];
   parentMethod?: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -78,7 +83,6 @@ export interface SideBarsProps {
   button: ButtonProps;
 }
 
-
 // Components forms
 export interface LoginFormProps {
   onLogin: (e: FormEvent) => void;
@@ -87,7 +91,7 @@ export interface LoginFormProps {
   errorMsg: string | null;
 }
 
-export interface RegisterFormProps extends Omit<LoginFormProps, 'onLogin'>  {
+export interface RegisterFormProps extends Omit<LoginFormProps, 'onLogin'> {
   onRegister: (e: FormEvent) => void;
 }
 
@@ -96,6 +100,18 @@ export interface CreateUserFormProps {
   onName: (e: ChangeEvent<HTMLInputElement>) => void;
   onRole: (e: ChangeEvent<HTMLSelectElement>) => void;
   errorMsg: string | null;
+}
+
+export interface CreateProjectFormProps {
+  onSubmit: (e: FormEvent) => void;
+  changeTitle: (e: ChangeEvent<HTMLInputElement>) => void;
+  changeDescription: (e: ChangeEvent<HTMLInputElement>) => void;
+  errorMsg: string | null;
+}
+
+export interface EditProjectFormProps extends CreateProjectFormProps {
+  changeDesigner: (e: ChangeEvent<HTMLSelectElement>) => void;
+  options: DesignerProps[];
 }
 
 // Content
@@ -123,15 +139,15 @@ export interface RegisterPagesProps {
 // User
 export type roleType = 'customer' | 'project_manager' | 'designer';
 
-export interface RolesOptions {
-  id: roleType;
-  label: string;
+export interface DesignerProps {
+  id: string;
+  name: string;
+  email: string;
 }
 
 export interface User {
-  id: string;
-  email: string;
-  role: roleType;
+  name: string;
+  role: string;
 }
 
 export interface Project {
@@ -140,4 +156,10 @@ export interface Project {
   description: string;
   file: string;
   assigned_role: roleType;
+}
+
+// Context
+export interface UserContextProps {
+  user: User;
+  setUserData: (name: string, role: string) => void;
 }

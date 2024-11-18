@@ -17,7 +17,7 @@ export const createProject = async (title: string, description: string) => {
 
     if (error) throw new Error(error.message);
 
-    return { success: true };
+    return { success: true, error: null };
   } catch (err: unknown) {
     return {
       success: false,
