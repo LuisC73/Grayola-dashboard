@@ -2,21 +2,20 @@
 
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useRegister } from '@/hooks/useRegister';
 import { RegisterForm } from '@/components/forms/RegisterForm/RegisterForm';
+import { registerUser } from '@/services/register';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-  const { register } = useRegister();
   const router = useRouter();
 
   const handleRegister = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    const { success, error: signUpError } = await register(email, password);
+    const { success, error: signUpError } = await registerUser(email, password);
 
     if (success) {
       router.push('/register/verify');

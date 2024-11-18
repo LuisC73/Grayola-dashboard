@@ -5,20 +5,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useLogin } from '@/hooks/useLogin';
 import { LoginForm } from '@/components/forms/LoginForm/LoginForm';
+import { loginUser } from '@/services/login';
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>('');
-  const { login } = useLogin();
   const router = useRouter();
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
 
-    const { success, error: signInError } = await login(email, password);
+    const { success, error: signInError } = await loginUser(email, password);
 
     if (success) {
       router.push('/dashboard');

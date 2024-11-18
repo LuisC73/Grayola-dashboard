@@ -1,22 +1,21 @@
 'use client';
 
-import { useCreateUser } from '@/hooks/useCreateUser';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CreateUserForm } from '@/components/forms/CreateUserForm/CreateUserForm';
+import { createUser } from '@/services/createUser';
 
 export default function CreatePage() {
   const [name, setName] = useState<string>('');
   const [role, setRole] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-  const { create } = useCreateUser();
   const router = useRouter();
 
   const handleCreateUser = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    const { success, error: createError } = await create(name, role);
+    const { success, error: createError } = await createUser(name, role);
 
     if (success) {
       router.push('/dashboard');
