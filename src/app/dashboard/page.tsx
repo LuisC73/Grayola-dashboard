@@ -42,11 +42,13 @@ export default function DashboardPage() {
               name={user.name}
               role={user.role}
             />
-            <CardReport
-              title="Proyectos creados"
-              count={countProjects}
-              errorMsg={error}
-            />
+            {user.role === 'customer' && (
+              <CardReport
+                title="Proyectos creados"
+                count={countProjects}
+                errorMsg={error}
+              />
+            )}
           </div>
         </div>
       </div>

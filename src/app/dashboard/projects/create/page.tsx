@@ -56,7 +56,7 @@ export default function ProjectsPage() {
         />
       </div>
       <div className="p-5 grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div className="order-2 md:order-1 w-full h-full p-5 lg:p-10 bg-tertiary bg-planet bg-no-repeat bg-bottom bg-[length:65%_auto] rounded-md overflow-hidden">
+        <div className="order-2 md:order-1 w-full h-full p-5 lg:p-10 min-h-[320px] md:min-h-full max-h-[500px] bg-tertiary bg-planet bg-no-repeat bg-bottom bg-[length:65%_auto] rounded-md overflow-hidden">
           <h2 className="font-[family-name:var(--font-title)] text-2xl">
             Administra tus proyectos de forma rápida y eficiente.
           </h2>
