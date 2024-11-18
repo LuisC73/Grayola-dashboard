@@ -23,7 +23,7 @@ export default function EditProjectPage() {
 
   const initialOption: DesignerProps = {
     'id': 'default',
-    'name': 'Selecciona uno de los diseñadores disponibles',
+    'name': 'Elige uno de los diseñadores disponibles',
     'email': 'default',
   };
 
