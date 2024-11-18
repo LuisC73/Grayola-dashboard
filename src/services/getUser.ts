@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabase';
 
-export const getUserName = async () => {
+export const getUser = async () => {
   try {
     const session = await supabase.auth.getSession();
 
@@ -10,16 +10,17 @@ export const getUserName = async () => {
 
     const { data, error: fetchError } = await supabase
       .from('users')
-      .select('name')
+      .select('name, role')
       .eq('id', user.id)
       .limit(1);
 
     if (fetchError) throw new Error(fetchError.message);
 
-    return { name: data[0]?.name || null, error: null };
+    return { name: data[0]?.name || null, role: data[0]?.role || null, error: null };
   } catch (err: unknown) {
     return {
       name: null,
+      role: null,
       error: err instanceof Error ? err.message : 'Unknown error',
     };
   }

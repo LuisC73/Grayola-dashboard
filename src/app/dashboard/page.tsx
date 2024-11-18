@@ -1,18 +1,20 @@
 "use client";
 
-import { getUserName } from "@/services/getUser";
+import { getUser } from "@/services/getUser";
 import { useEffect, useState } from "react";
 
 export default function DashboardPage() {
   const [name, setName] = useState<string | null>(null);
+  const [role, setRole] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchUserName = async () => {
-      const { name, error } = await getUserName();
+      const { name, role, error } = await getUser();
 
       if(error) setError(error);
       if(name) setName(name);
+      if(role) setRole(role);
     }
 
     fetchUserName();
@@ -22,7 +24,7 @@ export default function DashboardPage() {
     <div className="w-full grid grid-rows-[auto_1fr]">
       <div className="p-5 border-b border-gray-300">
         <h1 className="font-[family-name:var(--font-title)] text-black text-base">Dashboard</h1>
-        <span></span>
+        <span>{role}</span>
       </div>
       <div className="p-5 grid grid-rows-[auto_1fr]">
         <div>
