@@ -159,6 +159,10 @@ export const DASHBOARD_MENU: SideBarsProps = {
 
 export const ROLES_OPTIONS: SelectOptionsProps[] = [
   {
+    'id': 'default',
+    'label': 'Selecciona uno de los roles disponibles',
+  },
+  {
     'id': 'customer',
     'label': 'Cliente',
   },

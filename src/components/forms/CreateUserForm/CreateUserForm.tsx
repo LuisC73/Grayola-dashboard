@@ -35,7 +35,7 @@ export function CreateUserForm({ onCreate, onName, onRole, errorMsg }: CreateUse
           <Select
             id="selectRol"
             label="Seleccionar Rol"
-            initialValue={ROLES_OPTIONS[0].id}
+            initialValue={'default'}
             options={ROLES_OPTIONS}
             parentMethod={onRole}
             isRequired
