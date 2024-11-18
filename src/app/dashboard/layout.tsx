@@ -1,6 +1,12 @@
 import { SideBar } from "@components"
 import { DASHBOARD_MENU } from "@/content"
 import { UserProvider } from "@/context/UserContext"
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Grayola - Dashboard",
+  description: "Dashboard de proyectos",
+};
 
 export default function Layout ({ children }: { children: React.ReactNode }) {
   return (
