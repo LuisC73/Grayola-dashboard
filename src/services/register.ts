@@ -1,12 +1,17 @@
-import { supabase } from "@/lib/supabase";
+import { supabase } from '@/lib/supabase';
 
 export const registerUser = async (email: string, password: string) => {
   try {
+    const redirectUrl =
+      process.env.NODE_ENV === 'production'
+        ? 'https://grayola-dashboard.vercel.app'
+        : 'http://localhost:3000';
+
     const { error: signUpError } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}/register/create`,
+        emailRedirectTo: `${redirectUrl}/register/create`,
       },
     });
 

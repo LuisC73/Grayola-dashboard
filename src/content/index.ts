@@ -101,6 +101,11 @@ export const REGISTER_CONTENT: AuthProps = {
   }
 };
 
+export const VERIFY_CONTENT = {
+  'title': 'Verificación',
+  'description': 'Revisa tu correo y confirma tu cuenta para comenzar a usar Grayola.'
+}
+
 export const DASHBOARD_MENU: SideBarsProps = {
   'logo': {
     'src': '/images/logo.svg',

@@ -1,14 +1,23 @@
-import { Button } from '@/components/ui/Button/Button';
-import { Input } from '@/components/ui/Input/Input';
-import { RegisterFormProps } from '@/types';
-import Link from 'next/link';
+'use client';
 
-export function RegisterForm({
-  onRegister,
-  onEmail,
-  onPassword,
-  errorMsg,
-}: RegisterFormProps) {
+import { AlertModal, Button, Input } from '@components';
+import { RegisterFormProps } from '@types';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
+export function RegisterForm({ onRegister, onEmail, onPassword, errorMsg }: RegisterFormProps) {
+  const [isModalActive, setIsModalActive] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (errorMsg) {
+      setIsModalActive(true);
+    }
+  }, [errorMsg]);
+
+  const handleCloseModal = () => {
+    setIsModalActive(false);
+  };
+
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-col gap-5">
@@ -19,14 +28,16 @@ export function RegisterForm({
           <Input
             id="emailRegister"
             type="email"
-            label="Email"
+            label="Dirección de correo electrónico"
             parentMethod={onEmail}
+            isRequired
           />
           <Input
             id="passwordRegister"
             type="password"
             label="Contraseña"
             parentMethod={onPassword}
+            isRequired
           />
           <Button
             label="Crear cuenta"
@@ -35,7 +46,7 @@ export function RegisterForm({
           />
         </form>
         <p className="font-[family-name:var(--font-body)] text-sm text-gray-900 text-center">
-          Ya tienes una cuenta,{' '}
+          ¿Ya tienes una cuenta?,{' '}
           <Link
             href="/login"
             title="Ingresar a formulario de inicio de sesión"
@@ -45,7 +56,14 @@ export function RegisterForm({
           </Link>
         </p>
       </div>
-      <div>{errorMsg && <p style={{ color: 'red' }}>{errorMsg}</p>}</div>
+      {errorMsg && isModalActive && (
+        <AlertModal
+          type="Error"
+          title="Ha ocurrido un error"
+          description={errorMsg}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 }

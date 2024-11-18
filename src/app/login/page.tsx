@@ -61,7 +61,7 @@ export default function LoginPage() {
             errorMsg={error}
           />
         </div>
-        <div className="w-full h-full min-h-[470px] max-h-[600px] p-5 lg:p-10 bg-tertiary bg-decorate bg-no-repeat bg-right-bottom  bg-[length:85%_auto] md:bg-[length:45%_auto] lg:bg-[length:65%_auto] rounded-2xl overflow-hidden">
+        <div className="w-full h-full min-h-[470px] max-h-[600px] p-5 lg:p-10 bg-tertiary bg-decorate bg-no-repeat bg-right-bottom  bg-[length:85%_auto] md:bg-[length:45%_auto] lg:bg-[length:65%_auto] rounded-md overflow-hidden">
           <div className="flex flex-col gap-5 w-4/5">
             <h2 className="font-[family-name:var(--font-title)] text-2xl">
               {LOGIN_CONTENT.subtitle}
