@@ -18,7 +18,7 @@
 Primero, clona o descarga el repositorio en tu máquina local:
 
 ```bash
-$ git clone https://github.com/LuisC73/Grayola-dashboard.git
+git clone https://github.com/LuisC73/Grayola-dashboard.git
 ```
 
 ### 2. Instala las dependencias
@@ -37,9 +37,6 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
 ```
 
 ### 4. Correr en local
-
-Para preparar el componente para su uso, genera la build ejecutando:
-
 ```bash
 npm run dev
 ```
