@@ -3,7 +3,7 @@ import {
   HeaderProps,
   HomeProps,
   RegisterPagesProps,
-  RolesOptions,
+  SelectOptionsProps,
   SideBarsProps,
 } from '@types';
 
@@ -156,7 +156,7 @@ export const DASHBOARD_MENU: SideBarsProps = {
   },
 };
 
-export const ROLES_OPTIONS: RolesOptions[] = [
+export const ROLES_OPTIONS: SelectOptionsProps[] = [
   {
     'id': 'customer',
     'label': 'Cliente',

@@ -35,6 +35,24 @@ export interface ButtonLinkProps {
   style: 'Primary' | 'Secondary';
 }
 
+export interface CardProps {
+  title: string;
+  description: string;
+  button: ButtonProps;
+}
+
+export interface CardUserProps {
+  title: string;
+  name: string;
+  role: string;
+}
+
+export interface CardReportProps {
+  title: string;
+  count: number;
+  errorMsg: string;
+}
+
 export interface HeaderProps {
   logo: ImageProps;
   buttons?: ButtonLinkProps[];

@@ -25,3 +25,27 @@ export const getUser = async () => {
     };
   }
 };
+
+export const getUserProjectsCount = async () => {
+  try {
+    const session = await supabase.auth.getSession();
+
+    if (!session.data?.session?.user) throw new Error('User not authenticated');
+
+    const { user } = session.data.session;
+
+    const { count, error: fetchError } = await supabase
+      .from('projects')
+      .select('id', { count: 'exact' })
+      .eq('user_id', user.id);
+
+    if (fetchError) throw new Error(fetchError.message);
+
+    return { count, error: null };
+  } catch (err: unknown) {
+    return {
+      count: 0,
+      error: err instanceof Error ? err.message : 'Unknown error',
+    };
+  }
+};
