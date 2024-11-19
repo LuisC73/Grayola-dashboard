@@ -28,7 +28,9 @@ export default function CreatePage() {
       const { success, error: createError } = await createUser(name, role);
 
       if (success) {
-        router.push('/dashboard');
+        setTimeout(() => {
+          router.replace('/dashboard');
+        }, 100);
       }
 
       if (createError) {

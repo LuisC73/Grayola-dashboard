@@ -30,7 +30,9 @@ export default function LoginPage() {
       const { success, error: signInError } = await loginUser(email, password);
 
       if (success) {
-        router.push('/dashboard');
+        setTimeout(() => {
+          router.replace('/dashboard');
+        }, 100);
       }
 
       if (signInError) {
