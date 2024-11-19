@@ -3,7 +3,7 @@ import { supabase } from '@/lib/supabase';
 export const createProject = async (title: string, description: string) => {
   try {
     const { data: session } = await supabase.auth.getSession();
-    if (!session.session) throw new Error('User not authenticated');
+    if (!session.session) throw new Error('Usuario no autenticado');
 
     const userId = session.session.user.id;
 
@@ -21,7 +21,7 @@ export const createProject = async (title: string, description: string) => {
   } catch (err: unknown) {
     return {
       success: false,
-      error: err instanceof Error ? err.message : 'Unknown error',
+      error: err instanceof Error ? err.message : 'Error desconocido',
     };
   }
 };

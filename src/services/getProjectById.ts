@@ -12,6 +12,6 @@ export const getProjectById = async (id: string) => {
 
     return { data, error: null };
   } catch (error: unknown) {
-    return { data: null, error: error instanceof Error ? error.message : 'Unknown error' };
+    return { data: null, error: error instanceof Error ? error.message : 'Error desconocido' };
   }
 };

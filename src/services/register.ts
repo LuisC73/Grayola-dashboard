@@ -21,7 +21,7 @@ export const registerUser = async (email: string, password: string) => {
   } catch (err: unknown) {
     return {
       success: false,
-      error: err instanceof Error ? err.message : 'Unknown error',
+      error: err instanceof Error ? err.message : 'Error desconocido',
     };
   }
 };

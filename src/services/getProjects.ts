@@ -4,7 +4,7 @@ import { getProjectsData } from '@/types';
 export const getProjects = async () => {
   try {
     const { data: session } = await supabase.auth.getSession();
-    if (!session.session) throw new Error('User not authenticated');
+    if (!session.session) throw new Error('Usuario no autenticado');
 
     const userId = session.session.user.id;
 
@@ -32,7 +32,7 @@ export const getProjects = async () => {
   } catch (err: unknown) {
     return {
       projects: null,
-      error: err instanceof Error ? err.message : 'Unknown error',
+      error: err instanceof Error ? err.message : 'Error desconocido',
     };
   }
 };
