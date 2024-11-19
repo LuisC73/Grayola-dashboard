@@ -8,10 +8,6 @@ import {
   SideBarsProps,
 } from '@types';
 
-export const CONFIG = {
-  'openGraph': {},
-};
-
 export const HEADER_CONTENT: HeaderProps = {
   'logo': {
     'src': '/images/logo.svg',

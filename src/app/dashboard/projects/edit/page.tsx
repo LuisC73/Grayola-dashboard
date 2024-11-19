@@ -22,44 +22,6 @@ export default function EditProjectPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 
-  const initialOption: DesignerProps = {
-    'id': 'default',
-    'name': 'Elige uno de los diseñadores disponibles',
-    'email': 'default',
-  };
-
-  const fetchProjectData = async () => {
-    setLoading(true);
-    if (projectId) {
-      const { data, error } = await getProjectById(projectId);
-
-      if (data) {
-        setProjectData({
-          title: data.title,
-          description: data.description,
-          assigned_to: data.assigned_to,
-        });
-      } else {
-        setError(error);
-      }
-      setLoading(false);
-    }
-  };
-
-  const fetchDesigners = async () => {
-    setLoading(true);
-    const { designers, error } = await getDesigners();
-
-    if (designers) {
-      setOptions([initialOption, ...designers]);
-    }
-
-    if (error) setError(error);
-
-    setLoading(false);
-  };
-
-  
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const searchParams = new URLSearchParams(window.location.search);
@@ -69,6 +31,43 @@ export default function EditProjectPage() {
   }, []);
 
   useEffect(() => {
+    const initialOption: DesignerProps = {
+      'id': 'default',
+      'name': 'Elige uno de los diseñadores disponibles',
+      'email': 'default',
+    };
+
+    const fetchProjectData = async () => {
+      setLoading(true);
+      if (projectId) {
+        const { data, error } = await getProjectById(projectId);
+
+        if (data) {
+          setProjectData({
+            title: data.title,
+            description: data.description,
+            assigned_to: data.assigned_to,
+          });
+        } else {
+          setError(error);
+        }
+        setLoading(false);
+      }
+    };
+
+    const fetchDesigners = async () => {
+      setLoading(true);
+      const { designers, error } = await getDesigners();
+
+      if (designers) {
+        setOptions([initialOption, ...designers]);
+      }
+
+      if (error) setError(error);
+
+      setLoading(false);
+    };
+
     fetchProjectData();
     fetchDesigners();
   }, [projectId]);

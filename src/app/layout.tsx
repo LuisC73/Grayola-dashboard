@@ -5,6 +5,11 @@ import { fontGothic, fontPoppins } from "./fonts";
 export const metadata: Metadata = {
   title: "Grayola",
   description: "Dashboard de proyectos",
+  openGraph: {
+    title: 'Grayola',
+    description: 'Dashboard de proyectos',
+    images: ['/opengraph.jpg']
+  },
 };
 
 export default function RootLayout({

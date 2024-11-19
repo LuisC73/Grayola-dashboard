@@ -6,6 +6,11 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Grayola - Dashboard",
   description: "Dashboard de proyectos",
+  openGraph: {
+    title: 'Grayola - Dashboard',
+    description: 'Dashboard de proyectos',
+    images: ['/opengraph.jpg']
+  },
 };
 
 export default function Layout ({ children }: { children: React.ReactNode }) {
