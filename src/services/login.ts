@@ -17,7 +17,9 @@ export const loginUser = async (email: string, password: string) => {
 
       if (sessionData?.session) {
         const token = sessionData.session.access_token;
-        await createSession(token);
+        const { error: errorToken } = await createSession(token);
+
+        if (errorToken) throw new Error(errorToken);
       }
     }
 

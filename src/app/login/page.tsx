@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { LoginForm } from '@components';
+import { Loading, LoginForm } from '@components';
 import { loginUser } from '@/services/login';
 import { validateCredentials } from '@/utils/validateCredentials';
 
@@ -13,11 +13,13 @@ export default function LoginPage() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>('');
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
+    setLoading(true);
 
     const { success: successValidate, error: errorValidate } = validateCredentials(email, password);
 
@@ -30,15 +32,15 @@ export default function LoginPage() {
       const { success, error: signInError } = await loginUser(email, password);
 
       if (success) {
-        setTimeout(() => {
-          router.replace('/dashboard');
-        }, 100);
+        router.push('/dashboard');
       }
 
       if (signInError) {
         setError(signInError);
       }
     }
+
+    setLoading(false);
   };
 
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +50,14 @@ export default function LoginPage() {
   const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
+
+  if (loading) {
+    return (
+      <div className="w-screen h-screen grid items-center justify-center">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 grid-rows-1 min-h-screen justify-items-center">
