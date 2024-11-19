@@ -35,8 +35,6 @@ export default function LoginPage() {
 
       if (signInError) setError(signInError);
     }
-
-    setLoading(false);
   };
 
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
