@@ -8,6 +8,7 @@ export * from './ui/CardUser/CardUser';
 export * from './ui/Icon/Icon';
 export * from './ui/IconLink/IconLink';
 export * from './ui/Input/Input';
+export * from './ui/InputPassword/InputPassword';
 export * from './ui/Loading/Loading';
 export * from './ui/Modal/Modal';
 export * from './ui/Select/Select';

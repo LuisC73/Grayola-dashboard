@@ -1,7 +1,7 @@
 'use client';
 
 import { RegisterFormProps } from '@types';
-import { AlertModal, Button, Input } from '@components';
+import { AlertModal, Button, Input, InputPassword } from '@components';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -32,9 +32,8 @@ export function RegisterForm({ onRegister, onEmail, onPassword, errorMsg }: Regi
             parentMethod={onEmail}
             isRequired
           />
-          <Input
+          <InputPassword
             id="passwordRegister"
-            type="password"
             label="Contraseña"
             parentMethod={onPassword}
             isRequired

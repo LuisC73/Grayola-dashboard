@@ -1,6 +1,6 @@
 'use client';
 
-import { AlertModal, Button, Input } from '@components';
+import { AlertModal, Button, Input, InputPassword } from '@components';
 import { LoginFormProps } from '@types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -32,9 +32,8 @@ export function LoginForm({ onLogin, onEmail, onPassword, errorMsg }: LoginFormP
             parentMethod={onEmail}
             isRequired
           />
-          <Input
+          <InputPassword
             id="passwordLogin"
-            type="password"
             label="Contraseña"
             parentMethod={onPassword}
             isRequired
