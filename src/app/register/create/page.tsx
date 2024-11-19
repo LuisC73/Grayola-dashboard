@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { CreateUserForm, Loading } from '@components';
 import { createUser } from '@/services/createUser';
 import { CREATE_CONTENT } from '@/content';
-import { validateUser } from '@/utils/validateUser';
+import { validateUser } from '@utils';
 
 export default function CreatePage() {
   const [name, setName] = useState<string>('');

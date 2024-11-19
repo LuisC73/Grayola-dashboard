@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@utils';
 
 export const registerUser = async (email: string, password: string) => {
   try {

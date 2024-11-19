@@ -1,7 +1,7 @@
 'use client';
 
-import { AlertModal, Button, Input } from '@components';
 import { RegisterFormProps } from '@types';
+import { AlertModal, Button, Input } from '@components';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 

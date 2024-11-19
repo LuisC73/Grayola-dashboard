@@ -1,13 +1,11 @@
-import { supabase } from '@/lib/supabase';
-import { createSession } from '@/utils/session';
+import { supabase, createSession } from '@utils';
 
 export const createUser = async (name: string, role: string) => {
   try {
-    const session = await supabase.auth.getSession();
+    const { data: session } = await supabase.auth.getSession();
+    if (!session.session) throw new Error('Usuario no autenticado');
 
-    if (!session.data?.session?.user) throw new Error('Usuario no autenticado');
-
-    const { user } = session.data.session;
+    const { user } = session.session;
 
     const { data: existingUser, error: fetchError } = await supabase
       .from('users')
@@ -24,7 +22,10 @@ export const createUser = async (name: string, role: string) => {
 
     if (insertError) throw new Error(insertError.message);
 
-    await createSession(session.data.session.access_token);
+    const token = session.session.access_token;
+    const { error: errorToken } = await createSession(token);
+
+    if (errorToken) throw new Error(errorToken);
 
     return { success: true, error: null };
   } catch (err: unknown) {

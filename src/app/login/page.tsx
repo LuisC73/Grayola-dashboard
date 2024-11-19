@@ -7,7 +7,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loading, LoginForm } from '@components';
 import { loginUser } from '@/services/login';
-import { validateCredentials } from '@/utils/validateCredentials';
+import { validateCredentials } from '@utils';
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>('');

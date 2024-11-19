@@ -1,5 +1,5 @@
-import { supabase } from '@/lib/supabase';
-import { getProjectsData } from '@/types';
+import { supabase } from '@utils';
+import { getProjectsData } from '@types';
 
 export const getProjects = async () => {
   try {

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Loading, RegisterForm } from '@components';
 import { registerUser } from '@/services/register';
 import { REGISTER_CONTENT } from '@/content';
-import { validateCredentials } from '@/utils/validateCredentials';
+import { validateCredentials } from '@utils';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState<string>('');

@@ -1,5 +1,5 @@
 import { IconLinkProps } from '@types';
-import { Icon } from '../Icon/Icon';
+import { Icon } from '@components';
 
 export function IconLink({ icon, href, title, ariaLabel }: IconLinkProps) {
   return (

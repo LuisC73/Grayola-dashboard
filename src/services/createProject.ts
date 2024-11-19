@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@utils';
 
 export const createProject = async (title: string, description: string) => {
   try {

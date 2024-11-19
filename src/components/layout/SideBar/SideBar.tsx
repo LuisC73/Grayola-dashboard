@@ -1,8 +1,7 @@
 'use client';
 
-import { supabase } from '@/lib/supabase';
-import { SideBarsProps } from '@/types';
-import { deleteSession } from '@/utils/session';
+import { SideBarsProps } from '@types';
+import { supabase, deleteSession } from '@utils';
 import { Icon, Button, Alert } from '@components';
 import Image from 'next/image';
 import Link from 'next/link';

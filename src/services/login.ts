@@ -1,5 +1,4 @@
-import { supabase } from '@/lib/supabase';
-import { createSession } from '@/utils/session';
+import { supabase, createSession } from '@utils';
 
 export const loginUser = async (email: string, password: string) => {
   try {

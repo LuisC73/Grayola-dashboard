@@ -1,4 +1,4 @@
-import { ValidationResult } from "@/types";
+import { ValidationResult } from "@types";
 
 export function validateUser(username: string, role: string): ValidationResult {
   const usernameRegex = /^(?! )[a-zA-Z0-9_ ]*(?<! )$/;

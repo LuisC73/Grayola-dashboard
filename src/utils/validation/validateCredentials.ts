@@ -1,4 +1,4 @@
-import { ValidationResult } from '@/types';
+import { ValidationResult } from '@types';
 
 export function validateCredentials(email: string, password: string): ValidationResult {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
