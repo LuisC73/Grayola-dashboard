@@ -2,8 +2,9 @@
 
 import { CardReport, CardUser, Loading } from '@components';
 import { useUser } from '@/context/UserContext';
-import { getUserProjectsCount } from '@services';
+import { getProjectsCount } from '@services';
 import { useEffect, useState } from 'react';
+import { DASHBOARD_PAGE } from '@/content';
 
 export default function DashboardPage() {
   const [countProjects, setCountProjects] = useState<number>(0);
@@ -11,19 +12,19 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const { user } = useUser();
 
-  const fetchUserProjectCount = async () => {
-    setLoading(true);
-    const { count, error } = await getUserProjectsCount();
-
-    if (count) setCountProjects(count);
-    if (error) setError(error);
-
-    setLoading(false);
-  };
-
   useEffect(() => {
+    const fetchUserProjectCount = async () => {
+      setLoading(true);
+      const { count, error } = await getProjectsCount(user.id, user.role);
+
+      if (count) setCountProjects(count);
+      if (error) setError(error);
+
+      setLoading(false);
+    };
+
     fetchUserProjectCount();
-  }, []);
+  }, [user]);
 
   if (loading) {
     return (
@@ -42,10 +43,10 @@ export default function DashboardPage() {
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-2">
             <h2 className="font-[family-name:var(--font-title)] text-black text-base">
-              Bienvenido, {user.name}
+              {DASHBOARD_PAGE.title}, {user.name}
             </h2>
             <p className="font-[family-name:var(--font-body)] text-gray-900 text-sm">
-              Descubre el dashboard más eficiente para gestionar todos tus proyectos.
+              {DASHBOARD_PAGE.description}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -54,13 +55,11 @@ export default function DashboardPage() {
               name={user.name}
               role={user.role}
             />
-            {user.role === 'customer' && (
-              <CardReport
-                title="Proyectos creados"
-                count={countProjects}
-                errorMsg={error}
-              />
-            )}
+            <CardReport
+              title={DASHBOARD_PAGE.reportTitle?.[user.role]}
+              count={countProjects}
+              errorMsg={error}
+            />
           </div>
         </div>
       </div>

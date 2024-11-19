@@ -1,5 +1,6 @@
 import {
   AuthProps,
+  DashboardPage,
   HeaderProps,
   HomeProps,
   RegisterPagesProps,
@@ -153,6 +154,16 @@ export const DASHBOARD_MENU: SideBarsProps = {
   },
 };
 
+export const DASHBOARD_PAGE: DashboardPage = {
+  title: 'Bienvenido',
+  description: 'Descubre el dashboard más eficiente para gestionar todos tus proyectos.',
+  reportTitle: {
+    'customer': 'Proyectos creados',
+    'project_manager': 'Proyectos',
+    'designer': 'Proyectos asignados',
+  },
+};
+
 export const ROLES_OPTIONS: SelectOptionsProps[] = [
   {
     'id': 'default',
@@ -173,7 +184,7 @@ export const ROLES_OPTIONS: SelectOptionsProps[] = [
 ];
 
 export const ROLES: Roles = {
-  'customer' : 'Cliente',
+  'customer': 'Cliente',
   'project_manager': 'Project Manager',
-  'designer': 'Diseñador'
+  'designer': 'Diseñador',
 };

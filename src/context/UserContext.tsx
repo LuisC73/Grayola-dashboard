@@ -19,13 +19,13 @@ export const UserProvider = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const [user, setUser] = useState<User>({ name: '', role: '' });
+  const [user, setUser] = useState<User>({ id: '', name: '', role: '' });
 
   useEffect(() => {
     const fetchUserName = async () => {
       try {
-        const { name, role } = await getUser();
-        setUser({ name, role });
+        const { id, name, role } = await getUser();
+        setUser({ id, name, role });
       } catch (err) {
         console.error(err);
       }
@@ -34,8 +34,8 @@ export const UserProvider = ({
     fetchUserName();
   }, []);
 
-  const setUserData = (name: string, role: string) => {
-    setUser({ name, role });
+  const setUserData = (id: string, name: string, role: string) => {
+    setUser({ id, name, role });
   };
 
   return <UserContext.Provider value={{ user, setUserData }}>{children}</UserContext.Provider>;

@@ -114,3 +114,25 @@ export const getProjectById = async (id: string) => {
   }
 };
 
+export const getProjectsCount = async (userId: string, role: string) => {
+  try {
+    let query = supabase.from('projects').select('id', { count: 'exact' });
+
+    if (role === 'customer') {
+      query = query.eq('user_id', userId);
+    } else if (role === 'designer') {
+      query = query.eq('assigned_to', userId);
+    }
+
+    const { count, error: fetchError } = await query;
+
+    if (fetchError) throw new Error(fetchError.message);
+
+    return { count, error: null };
+  } catch (err: unknown) {
+    return {
+      count: 0,
+      error: err instanceof Error ? err.message : 'Error desconocido',
+    };
+  }
+};
