@@ -3,7 +3,7 @@ import { supabase } from '@/lib/supabase';
 export const getDesigners = async () => {
   try {
     const { data: session } = await supabase.auth.getSession();
-    if (!session.session) throw new Error('User not authenticated');
+    if (!session.session) throw new Error('Usuario no autenticado');
 
     const { data, error } = await supabase
       .from('users')
@@ -16,7 +16,7 @@ export const getDesigners = async () => {
   } catch (err: unknown) {
     return {
       designers: null,
-      error: err instanceof Error ? err.message : 'Unknown error',
+      error: err instanceof Error ? err.message : 'Error desconocido',
     };
   }
 };

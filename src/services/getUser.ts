@@ -4,7 +4,7 @@ export const getUser = async () => {
   try {
     const session = await supabase.auth.getSession();
 
-    if (!session.data?.session?.user) throw new Error('User not authenticated');
+    if (!session.data?.session?.user) throw new Error('Usuario no autenticado');
 
     const { user } = session.data.session;
 
@@ -21,7 +21,7 @@ export const getUser = async () => {
     return {
       name: null,
       role: null,
-      error: err instanceof Error ? err.message : 'Unknown error',
+      error: err instanceof Error ? err.message : 'Error desconocido',
     };
   }
 };
@@ -30,7 +30,7 @@ export const getUserProjectsCount = async () => {
   try {
     const session = await supabase.auth.getSession();
 
-    if (!session.data?.session?.user) throw new Error('User not authenticated');
+    if (!session.data?.session?.user) throw new Error('Usuario no autenticado');
 
     const { user } = session.data.session;
 
@@ -45,7 +45,7 @@ export const getUserProjectsCount = async () => {
   } catch (err: unknown) {
     return {
       count: 0,
-      error: err instanceof Error ? err.message : 'Unknown error',
+      error: err instanceof Error ? err.message : 'Error desconocido',
     };
   }
 };

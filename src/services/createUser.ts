@@ -5,7 +5,7 @@ export const createUser = async (name: string, role: string) => {
   try {
     const session = await supabase.auth.getSession();
 
-    if (!session.data?.session?.user) throw new Error('User not authenticated');
+    if (!session.data?.session?.user) throw new Error('Usuario no autenticado');
 
     const { user } = session.data.session;
 
@@ -16,7 +16,7 @@ export const createUser = async (name: string, role: string) => {
       .single();
 
     if (fetchError && fetchError.code !== 'PGRST116') throw new Error(fetchError.message);
-    if (existingUser) throw new Error('User already exists');
+    if (existingUser) throw new Error('El usuario ya existe');
 
     const { error: insertError } = await supabase
       .from('users')
@@ -30,7 +30,7 @@ export const createUser = async (name: string, role: string) => {
   } catch (err: unknown) {
     return {
       success: false,
-      error: err instanceof Error ? err.message : 'Unknown error',
+      error: err instanceof Error ? err.message : 'Error desconocido',
     };
   }
 };
