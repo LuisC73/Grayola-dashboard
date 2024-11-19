@@ -91,7 +91,7 @@ export interface ModalProps {
 export interface SelectOptionsProps {
   id: string;
   label: string;
-} 
+}
 
 export interface SelectProps extends Omit<InputProps, 'type' | 'parentMethod'> {
   options: SelectOptionsProps[];
@@ -163,6 +163,12 @@ export interface RegisterPagesProps {
   description: string;
 }
 
+export interface DashboardPage {
+  title: string;
+  description: string;
+  reportTitle: { [key: string]: string };
+}
+
 // User
 export type roleType = 'customer' | 'project_manager' | 'designer';
 
@@ -177,6 +183,7 @@ export interface DesignerProps {
 }
 
 export interface User {
+  id: string;
   name: string;
   role: string;
 }
@@ -193,23 +200,23 @@ export interface Project {
 export interface getProjectsData {
   data: Project[] | null;
   error: Error | null;
-} 
+}
 
 // Context
 export interface UserContextProps {
   user: User;
-  setUserData: (name: string, role: string) => void;
+  setUserData: (id: string, name: string, role: string) => void;
 }
 
 // Validation
 export interface ValidationResult {
   success: boolean;
   error: string | null;
-};
+}
 
 // Session
 export interface CookieProps {
   name: string;
-  options:  { httpOnly: boolean; secure: boolean; sameSite: 'strict', path: string }
+  options: { httpOnly: boolean; secure: boolean; sameSite: 'strict'; path: string };
   duration: number;
 }

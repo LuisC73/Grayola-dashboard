@@ -4,7 +4,7 @@ import { ButtonLink } from '@components';
 export function CardReport({ title, count, errorMsg }: CardReportProps) {
   return (
     <div className="flex flex-col gap-5 justify-between border border-gray-300 p-5 rounded-md bg-tertiary/30 bg-decorate bg-no-repeat bg-right-bottom bg-[length:35%_auto]">
-      <div className='flex flex-col gap-5'>
+      <div className="flex flex-col gap-5">
         <h3 className="font-[family-name:var(--font-body)] font-bold">{title}</h3>
         <p className="font-[family-name:var(--font-body)] text-gray-900 text-sm">
           <b>Total proyectos:</b> {count}
@@ -16,9 +16,9 @@ export function CardReport({ title, count, errorMsg }: CardReportProps) {
         )}
       </div>
       <ButtonLink
-        href="/dashboard/projects/create"
-        title="Crear nuevo proyecto"
-        label="Crear proyecto"
+        href="/dashboard/projects/"
+        title="Ver todos los proyectos"
+        label="Ver proyectos"
         style="Primary"
       />
     </div>
