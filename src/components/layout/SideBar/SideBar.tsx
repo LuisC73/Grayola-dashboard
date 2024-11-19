@@ -2,23 +2,21 @@
 
 import { supabase } from '@/lib/supabase';
 import { SideBarsProps } from "@/types";
-import { deleteTokenToCookie } from '@/utils/cookie';
+import { deleteSession } from '@/utils/session';
 import { Icon, Button } from "@components";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react';
 
 export function SideBar({ logo, items, button }: SideBarsProps) {
   const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
-  const router = useRouter()
   const pathname = usePathname();
 
   const handleLogout = async () => {
     try {
       await supabase.auth.signOut();
-      deleteTokenToCookie()
-      router.push('/')
+      await deleteSession()
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.error(err.message)
