@@ -1,6 +1,6 @@
 'use client';
 
-import { AlertModal, ButtonLink } from '@/components';
+import { AlertModal, ButtonLink, Loading } from '@/components';
 import { CreateProjectForm } from '@/components/forms/CreateProjectForm/CreateProjectForm';
 import { createProject } from '@/services/createProject';
 import { useRouter } from 'next/navigation';
@@ -11,10 +11,12 @@ export default function ProjectsPage() {
   const [description, setDescription] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const router = useRouter();
 
   const handleCreateProject = async (e: FormEvent) => {
+    setLoading(true);
     e.preventDefault();
     setError('');
 
@@ -29,6 +31,8 @@ export default function ProjectsPage() {
       setError(error);
       setIsModalActive(true);
     }
+
+    setLoading(false);
   };
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -43,6 +47,14 @@ export default function ProjectsPage() {
     setIsModalActive(false);
     router.push('/dashboard/projects');
   };
+
+  if (loading) {
+    return (
+      <div className="w-full h-full grid items-center justify-center">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-full grid grid-rows-[auto_1fr]">

@@ -1,25 +1,37 @@
 'use client';
 
-import { CardReport, CardUser } from '@components';
+import { CardReport, CardUser, Loading } from '@components';
 import { useUser } from '@/context/UserContext';
 import { getUserProjectsCount } from '@/services/getUser';
 import { useEffect, useState } from 'react';
 
 export default function DashboardPage() {
-  const { user } = useUser();
   const [countProjects, setCountProjects] = useState<number>(0);
   const [error, setError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
+  const { user } = useUser();
+
+  const fetchUserProjectCount = async () => {
+    setLoading(true);
+    const { count, error } = await getUserProjectsCount();
+
+    if (count) setCountProjects(count);
+    if (error) setError(error);
+
+    setLoading(false);
+  };
 
   useEffect(() => {
-    const fetchUserProjectCount = async () => {
-      const { count, error } = await getUserProjectsCount();
-
-      if (count) setCountProjects(count);
-      if (error) setError(error);
-    };
-
     fetchUserProjectCount();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="w-full h-full grid items-center justify-center">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full grid grid-rows-[auto_1fr]">

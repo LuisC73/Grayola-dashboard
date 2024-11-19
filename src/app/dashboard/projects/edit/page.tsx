@@ -1,6 +1,6 @@
 'use client';
 
-import { AlertModal, ButtonLink, EditProjectForm } from '@components';
+import { AlertModal, ButtonLink, EditProjectForm, Loading } from '@components';
 import { editProject } from '@/services/editProject';
 import { getDesigners } from '@/services/getDesigners';
 import { DesignerProps } from '@types';
@@ -19,6 +19,7 @@ export default function EditProjectPage() {
   const [options, setOptions] = useState<DesignerProps[]>([]);
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const [projectId, setProjectId] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 
   const initialOption: DesignerProps = {
@@ -27,6 +28,38 @@ export default function EditProjectPage() {
     'email': 'default',
   };
 
+  const fetchProjectData = async () => {
+    setLoading(true);
+    if (projectId) {
+      const { data, error } = await getProjectById(projectId);
+
+      if (data) {
+        setProjectData({
+          title: data.title,
+          description: data.description,
+          assigned_to: data.assigned_to,
+        });
+      } else {
+        setError(error);
+      }
+      setLoading(false);
+    }
+  };
+
+  const fetchDesigners = async () => {
+    setLoading(true);
+    const { designers, error } = await getDesigners();
+
+    if (designers) {
+      setOptions([initialOption, ...designers]);
+    }
+
+    if (error) setError(error);
+
+    setLoading(false);
+  };
+
+  
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const searchParams = new URLSearchParams(window.location.search);
@@ -36,32 +69,6 @@ export default function EditProjectPage() {
   }, []);
 
   useEffect(() => {
-    const fetchProjectData = async () => {
-      if (projectId) {
-        const { data, error } = await getProjectById(projectId);
-
-        if (data) {
-          setProjectData({
-            title: data.title,
-            description: data.description,
-            assigned_to: data.assigned_to,
-          });
-        } else {
-          setError(error);
-        }
-      }
-    };
-
-    const fetchDesigners = async () => {
-      const { designers, error } = await getDesigners();
-
-      if (designers) {
-        setOptions([initialOption, ...designers]);
-      }
-
-      if (error) setError(error);
-    };
-
     fetchProjectData();
     fetchDesigners();
   }, [projectId]);
@@ -104,8 +111,12 @@ export default function EditProjectPage() {
     router.push('/dashboard/projects');
   };
 
-  if (!projectId) {
-    <p className="font-[family-name:var(--font-body)] text-sm text-gray-900">Cargando datos...</p>;
+  if (loading) {
+    return (
+      <div className="w-full h-full grid items-center justify-center">
+        <Loading />
+      </div>
+    );
   }
 
   return (

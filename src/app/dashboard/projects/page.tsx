@@ -1,6 +1,6 @@
 'use client';
 
-import { Alert, AlertModal, ButtonLink, Card } from '@/components';
+import { Alert, AlertModal, ButtonLink, Card, Loading } from '@components';
 import { ROLES } from '@/content';
 import { useUser } from '@/context/UserContext';
 import { deleteProject } from '@/services/deleteProject';
@@ -14,16 +14,20 @@ export default function ProjectsPage() {
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const { user } = useUser();
   const router = useRouter();
 
   const userRole: string = ROLES?.[user.role] ?? 'Cliente';
 
   const fetchProject = async () => {
+    setLoading(true);
     const { projects, error } = await getProjects();
 
     if (projects) setProjects(projects);
     if (error) setError(error);
+
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -49,6 +53,14 @@ export default function ProjectsPage() {
     setIsModalActive(false);
     fetchProject();
   };
+
+  if (loading) {
+    return (
+      <div className="w-full h-full grid items-center justify-center">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-full grid grid-rows-[auto_1fr]">
