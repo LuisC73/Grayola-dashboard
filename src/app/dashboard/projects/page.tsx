@@ -1,6 +1,6 @@
 'use client';
 
-import { Alert, ButtonLink, Card } from '@/components';
+import { Alert, AlertModal, ButtonLink, Card } from '@/components';
 import { ROLES } from '@/content';
 import { useUser } from '@/context/UserContext';
 import { deleteProject } from '@/services/deleteProject';
@@ -13,19 +13,20 @@ export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[] | null>(null);
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
+  const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const { user } = useUser();
   const router = useRouter();
 
   const userRole: string = ROLES?.[user.role] ?? 'Cliente';
 
+  const fetchProject = async () => {
+    const { projects, error } = await getProjects();
+
+    if (projects) setProjects(projects);
+    if (error) setError(error);
+  };
+
   useEffect(() => {
-    const fetchProject = async () => {
-      const { projects, error } = await getProjects();
-
-      if (projects) setProjects(projects);
-      if (error) setError(error);
-    };
-
     fetchProject();
   }, []);
 
@@ -36,8 +37,17 @@ export default function ProjectsPage() {
   const handleDeleteProject = async (id: string) => {
     const { success, error } = await deleteProject(id);
 
-    if(success) setSuccess(success);
-    if(error) setError(error);
+    if (success) {
+      setSuccess(success);
+      setIsModalActive(true);
+    }
+
+    if (error) setError(error);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalActive(false);
+    fetchProject();
   };
 
   return (
@@ -78,14 +88,13 @@ export default function ProjectsPage() {
             />
           </div>
         )}
-        {success && (
-          <div>
-            <Alert
-              type="Success"
-              title="Error al cargar los proyectos"
-              description={'Se elimino el proyecto'}
-            />
-          </div>
+        {success && isModalActive && (
+          <AlertModal
+            type="Success"
+            title="Proyecto Eliminado"
+            description={'El proyecto se eliminó con éxito.'}
+            onClose={handleCloseModal}
+          />
         )}
       </div>
     </div>
