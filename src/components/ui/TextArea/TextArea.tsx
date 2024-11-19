@@ -17,7 +17,7 @@ export function TextArea(props: TextAreaProps) {
         onChange={(e) => props.parentMethod && props.parentMethod(e)}
         id={props.id}
         required={props.isRequired}
-        className="w-full text-gray-900 font-[family-name:var(--font-body)] text-sm border border-gray-300 p-2 rounded-md resize-y"
+        className="w-full min-h-[180px] text-gray-900 font-[family-name:var(--font-body)] text-sm border border-gray-300 p-2 rounded-md resize-y"
       />
     </div>
   );
