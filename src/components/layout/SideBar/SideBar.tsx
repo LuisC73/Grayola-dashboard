@@ -2,6 +2,7 @@
 
 import { supabase } from '@/lib/supabase';
 import { SideBarsProps } from "@/types";
+import { deleteTokenToCookie } from '@/utils/cookie';
 import { Icon, Button } from "@components";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,7 +17,7 @@ export function SideBar({ logo, items, button }: SideBarsProps) {
   const handleLogout = async () => {
     try {
       await supabase.auth.signOut();
-      document.cookie = "supabase-auth-token=; path=/; max-age=0";
+      deleteTokenToCookie()
       router.push('/')
     } catch (err: unknown) {
       if (err instanceof Error) {
