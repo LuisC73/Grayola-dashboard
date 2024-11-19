@@ -19,7 +19,7 @@ export default function RegisterPage() {
     const { success, error: signUpError } = await registerUser(email, password);
 
     if (success) {
-      router.push('/register/verify');
+      router.push('/register/create');
     }
 
     if (signUpError) {
