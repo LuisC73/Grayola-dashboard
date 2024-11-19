@@ -19,6 +19,10 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 
+  if (!token && pathname === '/register/create') {
+    return NextResponse.redirect(new URL('/register', req.url));
+  }
+
   return NextResponse.next();
 }
 
@@ -30,6 +34,7 @@ export const config = {
     '/dashboard/projects/edit',
     '/login',
     '/register',
+    '/register/create',
     '/',
   ],
 };

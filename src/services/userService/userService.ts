@@ -2,20 +2,37 @@ import { createSession, supabase } from '@utils';
 
 export const registerUser = async (email: string, password: string) => {
   try {
-    const redirectUrl =
-      process.env.NODE_ENV === 'production'
-        ? 'https://grayola-dashboard.vercel.app'
-        : 'http://localhost:3000';
+    const { data: existingUsers, error: fetchError } = await supabase
+      .from('users')
+      .select('id')
+      .eq('email', email)
+      .single();
 
-    const { error: signUpError } = await supabase.auth.signUp({
+    if (fetchError && fetchError.code !== 'PGRST116') throw new Error(fetchError.message);
+
+    if (existingUsers) {
+      return { success: false, error: 'El correo ya está registrado' };
+    }
+
+    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        emailRedirectTo: `${redirectUrl}/register/create`,
-      },
     });
 
     if (signUpError) throw new Error(signUpError.message);
+
+    if (signUpData.user) {
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+
+      if (sessionError) throw new Error(sessionError.message);
+
+      if (sessionData?.session) {
+        const token = sessionData.session.access_token;
+        const { error: errorToken } = await createSession(token);
+
+        if (errorToken) throw new Error(errorToken);
+      }
+    }
 
     return { success: true, error: null };
   } catch (err: unknown) {
@@ -33,25 +50,11 @@ export const createUser = async (name: string, role: string) => {
 
     const { user } = session.session;
 
-    const { data: existingUser, error: fetchError } = await supabase
-      .from('users')
-      .select('id')
-      .eq('id', user.id)
-      .single();
-
-    if (fetchError && fetchError.code !== 'PGRST116') throw new Error(fetchError.message);
-    if (existingUser) throw new Error('El usuario ya existe');
-
     const { error: insertError } = await supabase
       .from('users')
       .insert([{ id: user.id, email: user.email, role, name }]);
 
     if (insertError) throw new Error(insertError.message);
-
-    const token = session.session.access_token;
-    const { error: errorToken } = await createSession(token);
-
-    if (errorToken) throw new Error(errorToken);
 
     return { success: true, error: null };
   } catch (err: unknown) {

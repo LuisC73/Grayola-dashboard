@@ -2,7 +2,7 @@
 
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { CreateUserForm, Loading } from '@components';
+import { CreateUserForm } from '@components';
 import { createUser } from '@services';
 import { CREATE_CONTENT } from '@/content';
 import { validateUser } from '@utils';
@@ -11,15 +11,13 @@ export default function CreatePage() {
   const [name, setName] = useState<string>('');
   const [role, setRole] = useState<string>('default');
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const handleCreateUser = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
-    setLoading(true);
 
-    const { success: successValidate, error: errorValidate } = validateUser(name, role);
+    const { success: successValidate, error: errorValidate } = validateUser(role);
 
     if (errorValidate) {
       setError(errorValidate || 'Validación fallida');
@@ -29,18 +27,10 @@ export default function CreatePage() {
     if (successValidate) {
       const { success, error: createError } = await createUser(name, role);
 
-      if (success) {
-        setTimeout(() => {
-          router.replace('/dashboard');
-        }, 100);
-      }
+      if (success) router.push('/dashboard');
 
-      if (createError) {
-        setError(createError);
-      }
+      if (createError) setError(createError);
     }
-
-    setLoading(false);
   };
 
   const handleName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -50,14 +40,6 @@ export default function CreatePage() {
   const handleRole = (e: ChangeEvent<HTMLSelectElement>) => {
     setRole(e.target.value);
   };
-
-  if (loading) {
-    return (
-      <div className="w-screen h-screen grid items-center justify-center">
-        <Loading />
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col gap-5">

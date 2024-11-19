@@ -31,13 +31,9 @@ export default function LoginPage() {
     if (successValidate) {
       const { success, error: signInError } = await loginUser(email, password);
 
-      if (success) {
-        router.push('/dashboard');
-      }
+      if (success) router.push('/dashboard');
 
-      if (signInError) {
-        setError(signInError);
-      }
+      if (signInError) setError(signInError);
     }
 
     setLoading(false);
