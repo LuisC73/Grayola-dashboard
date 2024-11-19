@@ -9,7 +9,7 @@ import { validateUser } from '@/utils/validateUser';
 
 export default function CreatePage() {
   const [name, setName] = useState<string>('');
-  const [role, setRole] = useState<string>('');
+  const [role, setRole] = useState<string>('default');
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
