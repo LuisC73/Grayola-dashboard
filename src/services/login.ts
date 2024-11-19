@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase';
-import { saveTokenToCookie } from '@/utils/cookie';
+import { createSession } from '@/utils/session';
 
 export const loginUser = async (email: string, password: string) => {
   try {
@@ -17,7 +17,7 @@ export const loginUser = async (email: string, password: string) => {
 
       if (sessionData?.session) {
         const token = sessionData.session.access_token;
-        saveTokenToCookie(token);
+        await createSession(token);
       }
     }
 

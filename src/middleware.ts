@@ -1,30 +1,35 @@
 import { NextResponse, type NextRequest } from 'next/server';
-
-const protectedRoutes = [
-  '/dashboard',
-  '/dashboard/projects',
-  '/dashboard/projects/create',
-  '/dashboard/projects/edit',
-];
-const publicRoutes = ['/login', '/register'];
+import { cookies } from 'next/headers';
 
 export async function middleware(req: NextRequest) {
-  const cookieStore = req.cookies;
-  const token = cookieStore.get('supabase-auth-token');
-
   const { pathname } = req.nextUrl;
 
-  if (protectedRoutes.includes(pathname)) {
-    if (!token) {
-      return NextResponse.redirect(new URL('/', req.url));
-    }
+  const cookieStore = await cookies();
+  const token = cookieStore.get('supabase-auth-token');
+
+  if (token && pathname.startsWith('/dashboard')) {
+    return NextResponse.next();
   }
 
-  if (publicRoutes.includes(pathname)) {
-    if (token) {
-      return NextResponse.redirect(new URL('/dashboard', req.url));
-    }
+  if (!token && pathname.startsWith('/dashboard')) {
+    return NextResponse.redirect(new URL('/login', req.url));
+  }
+
+  if ((token && pathname === '/login') || (token && pathname === '/register')) {
+    return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 
   return NextResponse.next();
 }
+
+export const config = {
+  matcher: [
+    '/dashboard',
+    '/dashboard/projects',
+    '/dashboard/projects/create',
+    '/dashboard/projects/edit',
+    '/login',
+    '/register',
+    '/',
+  ],
+};

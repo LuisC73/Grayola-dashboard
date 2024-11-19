@@ -202,7 +202,14 @@ export interface UserContextProps {
 }
 
 // Validation
-export type ValidationResult = {
+export interface ValidationResult {
   success: boolean;
   error: string | null;
 };
+
+// Session
+export interface CookieProps {
+  name: string;
+  options:  { httpOnly: boolean; secure: boolean; sameSite: 'strict', path: string }
+  duration: number;
+}
