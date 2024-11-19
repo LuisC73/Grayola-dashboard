@@ -1,5 +1,6 @@
 # Grayola Dashboard
 
+![opengraph](https://github.com/user-attachments/assets/322b1134-e02d-4b65-9a26-bbfd675566df)
 
 ## Tecnologías
 
