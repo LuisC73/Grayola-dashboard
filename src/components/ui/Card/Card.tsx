@@ -3,7 +3,7 @@ import { Button } from '../Button/Button';
 
 export function Card(props: CardProps) {
   return (
-    <div className="w-full h-full border border-gray-300 rounded-md p-5 flex flex-col justify-between gap-5 max-h-[280px]">
+    <div className="w-full h-full border border-gray-300 rounded-md p-5 flex flex-col justify-between gap-5 max-h-[280px] bg-tertiary/30">
       <div className="flex flex-col gap-2 overflow-hidden">
         <h3 className="font-[family-name:var(--font-body)] font-bold mb-2">Proyecto</h3>
         <h4 className="font-[family-name:var(--font-body)] font-bold text-sm">Titulo:</h4>

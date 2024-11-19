@@ -40,7 +40,7 @@ export function SideBar({ logo, items, button }: SideBarsProps) {
         <ul className="flex flex-col gap-4 pt-10">  
           {items?.map((item, index) => (
             <li key={index}>
-              <Link href={item.href} title={item.title} className={`flex items-center gap-2 py-3 px-4 font-[family-name:var(--font-body)] text-sm text-black rounded-md hover:bg-tertiary/80 transition ease-out delay-150 ${pathname === item.href ? 'bg-tertiary/50' : 'bg-transparent'}`}>
+              <Link href={item.href} title={item.title} className={`flex items-center gap-2 py-3 px-4 font-[family-name:var(--font-body)] text-sm text-black rounded-md hover:bg-tertiary/50 transition ease-out delay-150 ${pathname === item.href ? 'bg-tertiary/30' : 'bg-transparent'}`}>
                 <Icon {...item.icon} />
                 {item.label}
               </Link>
