@@ -1,5 +1,5 @@
 import { CardProps } from '@/types';
-import { Button } from '../Button/Button';
+import { Button } from '@components';
 
 export function Card(props: CardProps) {
   return (

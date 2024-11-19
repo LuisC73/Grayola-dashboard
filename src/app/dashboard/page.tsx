@@ -2,7 +2,7 @@
 
 import { CardReport, CardUser, Loading } from '@components';
 import { useUser } from '@/context/UserContext';
-import { getUserProjectsCount } from '@/services/getUser';
+import { getUserProjectsCount } from '@services';
 import { useEffect, useState } from 'react';
 
 export default function DashboardPage() {

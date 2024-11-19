@@ -1,4 +1,4 @@
-import { AlertModalProps } from '@/types';
+import { AlertModalProps } from '@types';
 import { Icon } from '@components';
 
 export function AlertModal({ type, title, description, onClose }: AlertModalProps) {

@@ -1,5 +1,5 @@
 import { ROLES } from '@/content';
-import { CardUserProps } from '@/types';
+import { CardUserProps } from '@types';
 
 export function CardUser({ title, name, role }: CardUserProps) {
   const firstLetterName: string = name?.split('')?.[0] ?? 'U';

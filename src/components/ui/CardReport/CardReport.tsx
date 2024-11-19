@@ -1,4 +1,4 @@
-import { CardReportProps } from '@/types';
+import { CardReportProps } from '@types';
 import { ButtonLink } from '@components';
 
 export function CardReport({ title, count, errorMsg }: CardReportProps) {

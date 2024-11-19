@@ -1,6 +1,6 @@
 'use client';
 
-import { getUser } from '@/services/getUser';
+import { getUser } from '@services';
 import { User, UserContextProps } from '@types';
 import { createContext, useState, useContext, useEffect } from 'react';
 

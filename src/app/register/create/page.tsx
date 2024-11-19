@@ -2,20 +2,22 @@
 
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { CreateUserForm } from '@components';
-import { createUser } from '@/services/createUser';
+import { CreateUserForm, Loading } from '@components';
+import { createUser } from '@services';
 import { CREATE_CONTENT } from '@/content';
-import { validateUser } from '@/utils/validateUser';
+import { validateUser } from '@utils';
 
 export default function CreatePage() {
   const [name, setName] = useState<string>('');
   const [role, setRole] = useState<string>('default');
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const handleCreateUser = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
+    setLoading(true);
 
     const { success: successValidate, error: errorValidate } = validateUser(name, role);
 
@@ -37,6 +39,8 @@ export default function CreatePage() {
         setError(createError);
       }
     }
+
+    setLoading(false);
   };
 
   const handleName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -46,6 +50,14 @@ export default function CreatePage() {
   const handleRole = (e: ChangeEvent<HTMLSelectElement>) => {
     setRole(e.target.value);
   };
+
+  if (loading) {
+    return (
+      <div className="w-screen h-screen grid items-center justify-center">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-5">

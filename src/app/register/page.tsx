@@ -2,20 +2,22 @@
 
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { RegisterForm } from '@components';
-import { registerUser } from '@/services/register';
+import { Loading, RegisterForm } from '@components';
+import { registerUser } from '@services';
 import { REGISTER_CONTENT } from '@/content';
-import { validateCredentials } from '@/utils/validateCredentials';
+import { validateCredentials } from '@utils';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const handleRegister = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
+    setLoading(true);
 
     const { success: successValidate, error: errorValidate } = validateCredentials(email, password);
 
@@ -35,6 +37,8 @@ export default function RegisterPage() {
         setError(signUpError);
       }
     }
+
+    setLoading(false);
   };
 
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +48,14 @@ export default function RegisterPage() {
   const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
+
+  if (loading) {
+    return (
+      <div className="w-screen h-screen grid items-center justify-center">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-5">
