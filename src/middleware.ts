@@ -1,6 +1,11 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
-const protectedRoutes = ['/dashboard', '/dashboard/projects'];
+const protectedRoutes = [
+  '/dashboard',
+  '/dashboard/projects',
+  '/dashboard/projects/create',
+  '/dashboard/projects/edit',
+];
 const publicRoutes = ['/login', '/register'];
 
 export async function middleware(req: NextRequest) {
@@ -22,4 +27,4 @@ export async function middleware(req: NextRequest) {
   }
 
   return NextResponse.next();
-};
+}
