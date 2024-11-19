@@ -200,3 +200,9 @@ export interface UserContextProps {
   user: User;
   setUserData: (name: string, role: string) => void;
 }
+
+// Validation
+export type ValidationResult = {
+  success: boolean;
+  error: string | null;
+};

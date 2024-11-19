@@ -7,6 +7,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { LoginForm } from '@components';
 import { loginUser } from '@/services/login';
+import { validateCredentials } from '@/utils/validateCredentials';
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>('');
@@ -16,15 +17,25 @@ export default function LoginPage() {
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
+    setError(null);
 
-    const { success, error: signInError } = await loginUser(email, password);
+    const { success: successValidate, error: errorValidate } = validateCredentials(email, password);
 
-    if (success) {
-      router.push('/dashboard');
+    if (errorValidate) {
+      setError(errorValidate || 'Validación fallida');
+      return;
     }
 
-    if (signInError) {
-      setError(signInError);
+    if (successValidate) {
+      const { success, error: signInError } = await loginUser(email, password);
+
+      if (success) {
+        router.push('/dashboard');
+      }
+
+      if (signInError) {
+        setError(signInError);
+      }
     }
   };
 

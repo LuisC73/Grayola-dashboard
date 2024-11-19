@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { CreateUserForm } from '@components';
 import { createUser } from '@/services/createUser';
 import { CREATE_CONTENT } from '@/content';
+import { validateUser } from '@/utils/validateUser';
 
 export default function CreatePage() {
   const [name, setName] = useState<string>('');
@@ -16,14 +17,23 @@ export default function CreatePage() {
     e.preventDefault();
     setError(null);
 
-    const { success, error: createError } = await createUser(name, role);
+    const { success: successValidate, error: errorValidate } = validateUser(name, role);
 
-    if (success) {
-      router.push('/dashboard');
+    if (errorValidate) {
+      setError(errorValidate || 'Validación fallida');
+      return;
     }
 
-    if (createError) {
-      setError(createError);
+    if (successValidate) {
+      const { success, error: createError } = await createUser(name, role);
+
+      if (success) {
+        router.push('/dashboard');
+      }
+
+      if (createError) {
+        setError(createError);
+      }
     }
   };
 

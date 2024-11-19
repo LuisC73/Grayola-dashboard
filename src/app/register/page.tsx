@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { RegisterForm } from '@components';
 import { registerUser } from '@/services/register';
 import { REGISTER_CONTENT } from '@/content';
+import { validateCredentials } from '@/utils/validateCredentials';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState<string>('');
@@ -16,14 +17,23 @@ export default function RegisterPage() {
     e.preventDefault();
     setError(null);
 
-    const { success, error: signUpError } = await registerUser(email, password);
+    const { success: successValidate, error: errorValidate } = validateCredentials(email, password);
 
-    if (success) {
-      router.push('/register/create');
+    if (errorValidate) {
+      setError(errorValidate || 'Validación fallida');
+      return;
     }
 
-    if (signUpError) {
-      setError(signUpError);
+    if (successValidate) {
+      const { success, error: signUpError } = await registerUser(email, password);
+
+      if (success) {
+        router.push('/register/create');
+      }
+
+      if (signUpError) {
+        setError(signUpError);
+      }
     }
   };
 
@@ -36,7 +46,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className='flex flex-col gap-5'>
+    <div className="flex flex-col gap-5">
       <div className="flex flex-col gap-2 border-b border-gray-300 pb-5">
         <h1 className="font-[family-name:var(--font-title)] text-xl md:text-2xl lg:text-3xl">
           {REGISTER_CONTENT.title}
