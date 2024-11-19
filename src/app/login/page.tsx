@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loading, LoginForm } from '@components';
-import { loginUser } from '@/services/login';
+import { loginUser } from '@services';
 import { validateCredentials } from '@utils';
 
 export default function LoginPage() {

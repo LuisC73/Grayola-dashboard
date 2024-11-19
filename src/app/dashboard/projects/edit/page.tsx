@@ -1,12 +1,10 @@
 'use client';
 
 import { AlertModal, ButtonLink, EditProjectForm, Loading } from '@components';
-import { editProject } from '@/services/editProject';
-import { getDesigners } from '@/services/getDesigners';
+import { editProject, getDesigners, getProjectById } from '@services';
 import { DesignerProps } from '@types';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getProjectById } from '@/services/getProjectById';
 
 export default function EditProjectPage() {
   const [projectData, setProjectData] = useState({

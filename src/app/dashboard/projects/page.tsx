@@ -3,8 +3,7 @@
 import { Alert, AlertModal, ButtonLink, Card, Loading } from '@components';
 import { ROLES } from '@/content';
 import { useUser } from '@/context/UserContext';
-import { deleteProject } from '@/services/deleteProject';
-import { getProjects } from '@/services/getProjects';
+import { deleteProject, getProjects } from '@services';
 import { Project } from '@types';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';

@@ -1,7 +1,7 @@
 'use client';
 
 import { AlertModal, ButtonLink, Loading, CreateProjectForm } from '@components';
-import { createProject } from '@/services/createProject';
+import { createProject } from '@services';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 

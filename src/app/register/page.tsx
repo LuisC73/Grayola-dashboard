@@ -3,7 +3,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loading, RegisterForm } from '@components';
-import { registerUser } from '@/services/register';
+import { registerUser } from '@services';
 import { REGISTER_CONTENT } from '@/content';
 import { validateCredentials } from '@utils';
 
