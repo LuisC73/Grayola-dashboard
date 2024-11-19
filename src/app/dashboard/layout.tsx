@@ -13,7 +13,9 @@ export default function Layout ({ children }: { children: React.ReactNode }) {
     <UserProvider>
       <div className="grid grid-cols-1 grid-rows-[auto_1fr] md:grid-cols-[200px_1fr] lg:grid-cols-[240px_1fr] md:grid-rows-1 min-h-screen overflow-hidden">
         <SideBar {...DASHBOARD_MENU} />
-        {children}
+        <div className="w-full min-h-screen h-full pt-[73px] md:pt-0 md:col-start-2">
+          {children}
+        </div>
       </div>
     </UserProvider>
   )

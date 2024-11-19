@@ -41,7 +41,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="w-full grid grid-rows-[auto_1fr]">
+    <div className="w-full h-full grid grid-rows-[auto_1fr]">
       <div className="p-5 border-b border-gray-300 grid grid-rows-1 grid-cols-[1fr_auto] items-center">
         <h1 className="font-[family-name:var(--font-title)] text-black text-base">Proyectos</h1>
         {user.role === 'customer' ? (

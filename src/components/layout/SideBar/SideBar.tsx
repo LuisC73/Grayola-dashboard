@@ -32,7 +32,7 @@ export function SideBar({ logo, items, button }: SideBarsProps) {
   }
 
   return (
-    <aside className="relative w-full h-fit md:h-full bg-custom bg-no-repeat border-r border-gray-300">
+    <aside className="fixed max-h-screen w-full md:w-[200px] lg:w-[240px] h-fit md:h-full bg-custom bg-no-repeat border-r border-gray-300">
       <div className='hidden w-full h-full p-5 md:grid grid-rows-[auto_1fr_auto] bg-gray-200 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10'>
         <Link href='/' title='Volver al inicio'>
           <Image src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} />
