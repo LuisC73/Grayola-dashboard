@@ -24,6 +24,7 @@ export default function LoginPage() {
     const { success: successValidate, error: errorValidate } = validateCredentials(email, password);
 
     if (errorValidate) {
+      setLoading(false);
       setError(errorValidate || 'Validación fallida');
       return;
     }
@@ -33,7 +34,10 @@ export default function LoginPage() {
 
       if (success) router.push('/dashboard');
 
-      if (signInError) setError(signInError);
+      if (signInError) {
+        setLoading(false);
+        setError(signInError);
+      }
     }
   };
 
